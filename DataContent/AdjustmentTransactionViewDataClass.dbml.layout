@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="AdjustmentTransactionViewDataClass">
+  <DataContextMoniker Name="/AdjustmentTransactionViewDataContext" />
+  <nestedChildShapes>
+    <classShape Id="d34903f6-0c5a-482c-be60-ee1b0ced88b2" absoluteBounds="2.125, 0.75, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/AdjustmentTransactionViewDataContext/AdjustmentTransactionView" />
+      <nestedChildShapes>
+        <elementListCompartment Id="14997360-da33-41ef-bfdd-54594bd4b04a" absoluteBounds="2.14, 1.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

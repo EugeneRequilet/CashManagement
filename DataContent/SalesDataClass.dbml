@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CM" Class="SalesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(local)\SQLEXPRESS;Initial Catalog=CM;Integrated Security=True;MultipleActiveResultSets=True" SettingsObjectName="CashManagement.My.MySettings" SettingsPropertyName="CMConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Sales" Member="Sales">
+    <Type Name="Sales">
+      <Column Name="RecordId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="GrossSales" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Payout" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="TurnoverCash" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="TurnoverCreditCard" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="TurnoverOther" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="StaffPercent100" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="DiscountPercent20" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="WastagePercent100" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="PromoPercent100" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="OverbakePercent100" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="DamagePercent100" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="SamplePercent100" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="StockVarianceValue" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Memo" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="EmployeeRecordId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ChecksPaid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ErrorCorrects" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ErrorCorrectsValue" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Void" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="VoidsValue" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

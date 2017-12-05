@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CM" Class="CashUpViewDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(local)\SQLEXPRESS;Initial Catalog=CM;Integrated Security=True;MultipleActiveResultSets=True" SettingsObjectName="CashManagement.My.MySettings" SettingsPropertyName="CMConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.CashupView" Member="CashupViews">
+    <Type Name="CashupView">
+      <Column Name="RecordId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Time" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TimeDesc" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeRecordId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CashInTill" Type="System.Decimal" DbType="Decimal(13,2)" CanBeNull="true" />
+      <Column Name="Float" Type="System.Decimal" DbType="Decimal(13,2)" CanBeNull="true" />
+      <Column Name="CashInTillLessFloat" Type="System.Decimal" DbType="Decimal(14,2)" CanBeNull="true" />
+      <Column Name="DepReducedBy" Type="System.Decimal" DbType="Decimal(13,2)" CanBeNull="true" />
+      <Column Name="DepIncreasedBy" Type="System.Decimal" DbType="Decimal(13,2)" CanBeNull="true" />
+      <Column Name="CashDeposited" Type="System.Decimal" DbType="Decimal(16,2)" CanBeNull="true" />
+      <Column Name="CreditCardDeposited" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="DepositSkims" Type="System.Decimal" DbType="Decimal(13,2)" CanBeNull="true" />
+      <Column Name="Payouts" Type="System.Decimal" DbType="Decimal(13,2)" CanBeNull="true" />
+      <Column Name="Variance" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="SalesType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SalesTypeDesc" Type="System.String" DbType="VarChar(13) NOT NULL" CanBeNull="false" />
+      <Column Name="PaymentType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PaymentTypeDesc" Type="System.String" DbType="VarChar(12) NOT NULL" CanBeNull="false" />
+      <Column Name="PayoutReason1" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="EmployeeName" Type="System.String" DbType="VarChar(51)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

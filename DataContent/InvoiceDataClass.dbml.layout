@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="InvoiceDataClass">
+  <DataContextMoniker Name="/InvoiceDataContext" />
+  <nestedChildShapes>
+    <classShape Id="84474b90-bc3b-48ce-a46f-b11490949891" absoluteBounds="4.125, 0.75, 2, 2.5401025390625">
+      <DataClassMoniker Name="/InvoiceDataContext/Invoice" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4286ecbb-813b-4648-b6dc-915e4df06d30" absoluteBounds="4.14, 1.21, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="CashupReconView">
+  <DataContextMoniker Name="/CashupReconViewDataContext" />
+  <nestedChildShapes>
+    <classShape Id="42e1d46c-f174-44d3-9c06-aa94cbca07f3" absoluteBounds="3.875, 0.5, 2, 3.3093082682291666">
+      <DataClassMoniker Name="/CashupReconViewDataContext/CashupReconView" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cc603c65-94e5-4f72-841e-f53f16bd0683" absoluteBounds="3.89, 0.96, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CM" Class="LeaveTakenViewDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(local)\SQLEXPRESS;Initial Catalog=CM;Integrated Security=True;MultipleActiveResultSets=True" SettingsObjectName="CashManagement.My.MySettings" SettingsPropertyName="CMConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.LeaveTakenView" Member="LeaveTakenViews">
+    <Type Name="LeaveTakenView">
+      <Column Name="RecordId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Days" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LeaveType" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="LeaveTakenEmployeeRecordId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ThisLeaveTakenEmployee" Type="System.String" DbType="VarChar(51)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

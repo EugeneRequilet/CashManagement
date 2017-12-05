@@ -1,0 +1,393 @@
+﻿ALTER TABLE Invoice
+ADD PaymentType Int NULL
+GO
+UPDATE Invoice
+SET PaymentType = 0
+GO
+ALTER TABLE Invoice
+ALTER Column PaymentType Int NOT NULL
+GO
+--------------------------------------------------
+USE [CM]
+GO
+
+--Drop View [dbo].[SupplierView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE VIEW [dbo].[SupplierView]
+AS
+SELECT        dbo.Supplier.RecordId, dbo.Supplier.Description, dbo.Supplier.Telephone, dbo.Supplier.CellNumber,
+					dbo.Supplier.InactiveSupplier, dbo.Supplier.COS, 
+						CASE WHEN dbo.Supplier.InactiveSupplier = 0 THEN '' 
+							 WHEN dbo.Supplier.InactiveSupplier = 1 THEN 'Inactive' 
+						END AS InactiveSupplierDescription, 
+						CASE WHEN dbo.Supplier.COS = 0 THEN 'Expense' 
+							 WHEN dbo.Supplier.COS = 1 THEN 'COS' 
+						END AS ExpenseType
+FROM            dbo.Supplier 
+
+GO
+---------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop View [dbo].[InvoiceView]
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[InvoiceView]
+AS
+SELECT        dbo.Invoice.RecordId, dbo.Invoice.Date, dbo.Invoice.DocumentType, 
+						CASE WHEN dbo.Invoice.DocumentType = 'C' THEN 1 
+							WHEN dbo.Invoice.DocumentType = 'P' THEN 2 
+							ELSE 0 
+							END AS DocumentTypeOrder, 
+						CASE WHEN dbo.Invoice.DocumentType = 'C' THEN 'Credit Note' 
+							WHEN dbo.Invoice.DocumentType = 'P' THEN 'Payment' 
+							WHEN dbo.Invoice.DocumentType = 'B' THEN 'Invoice And Payment' 
+							ELSE 'Invoice' 
+							END AS DocumentTypeDesc, 
+						dbo.Invoice.DocumentNumber, dbo.Invoice.Amount, 
+						CASE WHEN dbo.Invoice.DocumentType = 'I' Or dbo.Invoice.DocumentType = 'B' THEN dbo.Invoice.Amount END AS InvoiceAmount, 
+						CASE WHEN dbo.Invoice.DocumentType = 'C' THEN dbo.Invoice.Amount END AS CreditNoteAmount, 
+						CASE WHEN dbo.Invoice.DocumentType = 'P' Or dbo.Invoice.DocumentType = 'B' THEN dbo.Invoice.Amount END AS PaymentAmount, 
+						dbo.Invoice.PaymentType, 
+						CASE WHEN dbo.Invoice.PaymentType = 0 THEN 'Bank' 
+							WHEN dbo.Invoice.PaymentType = 1 THEN 'Cash' 
+							WHEN dbo.Invoice.PaymentType = 2 THEN 'Card' 
+							ELSE 'Bank' 
+							END AS PaymentTypeDesc, 
+						dbo.Invoice.Memo, dbo.Invoice.SupplierRecordId, dbo.Supplier.Description AS SupplierName, 
+						dbo.Employee.FirstName + ' ' + dbo.Employee.Surname AS EmployeeName, 
+						(Select Sum(CASE WHEN dbo.AdjustmentRequested.DocumentType = 'C' 
+						THEN (0 - Amount) ELSE Amount END) AS AdjustmentAmt
+						From dbo.AdjustmentRequested Where dbo.Invoice.DocumentNumber = dbo.AdjustmentRequested.InvoiceNumber) AS AdjustmentAmount
+
+FROM            dbo.Invoice 
+				INNER JOIN dbo.Employee ON dbo.Invoice.EmployeeRecordId = dbo.Employee.RecordId 
+				INNER JOIN dbo.Supplier ON dbo.Invoice.SupplierRecordId = dbo.Supplier.RecordId
+GO
+
+---------------------------------------------------------
+---------------------------------------------------------
+ALTER TABLE CashUp
+ADD SalesType Int NULL, PaymentType Int NULL
+GO
+UPDATE CashUp
+SET SalesType = 0, PaymentType = 0
+GO
+ALTER TABLE CashUp
+ALTER Column SalesType Int NOT NULL
+GO
+ALTER TABLE CashUp
+ALTER Column PaymentType Int NOT NULL
+GO
+--------------------------------------------------------
+USE CM
+ALTER TABLE Asset
+Add BranchCode varchar(5) NULL
+GO
+Update Asset set BranchCode = ''
+Go
+ALTER TABLE Asset
+ALTER COLUMN BranchCode varchar(5) NULL
+GO
+ALTER TABLE Asset DROP CONSTRAINT UQ_Asset_Description_Key
+GO
+ALTER TABLE Asset 
+ADD CONSTRAINT [UQ_Asset_Branch_Description_Key] UNIQUE NONCLUSTERED 
+(
+	[BranchCode] ASC,
+	[Description] ASC
+)
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, 
+ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+USE CM
+ALTER TABLE FirmDetails
+Add AttachmentDirectory varchar(255) NULL
+GO
+Update FirmDetails Set AttachmentDirectory = GeneralDefaultDirectory
+GO
+--------------------------------------------------------
+USE [CM]
+GO
+
+--Drop View [dbo].[AssetView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[AssetView]
+AS
+SELECT		dbo.Asset.RecordId, dbo.Asset.BranchCode, dbo.Asset.Description, dbo.Asset.SerialNumber, 
+						dbo.Asset.PurchaseDate, dbo.Asset.PurchaseAmount, dbo.Asset.SaleDate, 
+						dbo.Asset.SaleAmount, dbo.Asset.Memo, dbo.Asset.EmployeeRecordId, 
+						dbo.Employee.FirstName + ' ' + dbo.Employee.Surname AS EmployeeName
+FROM		dbo.Asset INNER JOIN
+                        dbo.Employee ON dbo.Asset.EmployeeRecordId = dbo.Employee.RecordId
+GO
+--------------------------------------------------------
+USE [CM]
+GO
+
+--Drop Table [dbo].[Attachment]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Attachment](
+	[RecordId] [int] IDENTITY(1,1) NOT NULL,
+	[Date] [date] NOT NULL,
+	[Description] [varchar](50) NOT NULL,
+	[FileAndLocation] [varchar](255) NULL,
+	[EmployeeRecordId] [int] NOT NULL,
+	[AssetRecordId] [int] NOT NULL,
+ CONSTRAINT [PK_Attachment_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_Attachment_Key] UNIQUE NONCLUSTERED 
+(
+	[Date] ASC,
+	[Description] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Attachment] ADD  DEFAULT ((0)) FOR [AssetRecordId]
+GO
+
+ALTER TABLE [dbo].[Attachment]  WITH CHECK ADD  CONSTRAINT [FK_Attachment_Employee_EmployeeRecordId] FOREIGN KEY([EmployeeRecordId])
+REFERENCES [dbo].[Employee] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[Attachment] CHECK CONSTRAINT [FK_Attachment_Employee_EmployeeRecordId]
+GO
+
+ALTER TABLE [dbo].[Attachment]  WITH CHECK ADD CONSTRAINT [FK_Attachment_Asset_AssetRecordId] FOREIGN KEY([AssetRecordId])
+REFERENCES [dbo].[Asset] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[Attachment] CHECK CONSTRAINT [FK_Attachment_Asset_AssetRecordId]
+GO
+--------------------------------------------------------
+USE [CM]
+GO
+
+--Drop View [dbo].[AttachmentView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[AttachmentView]
+AS
+SELECT        dbo.Attachment.RecordId, dbo.Attachment.Date, dbo.Attachment.Description, 
+						dbo.Attachment.FileAndLocation, dbo.Attachment.AssetRecordId, 
+						dbo.Attachment.EmployeeRecordId, 
+						dbo.Employee.FirstName + ' ' + dbo.Employee.Surname AS EmployeeName 
+FROM            dbo.Attachment INNER JOIN 
+                         dbo.Employee ON dbo.Attachment.EmployeeRecordId = dbo.Employee.RecordId
+GO
+
+--------------------------------------------------------
+
+USE [CM]
+GO
+update Employee set EmployeeType = EmployeeType + 1
+GO
+--------------------------------------------------------
+USE [CM]
+GO
+
+Drop View [dbo].[EmployeeView]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE VIEW [dbo].[EmployeeView]
+AS
+SELECT        dbo.Employee.RecordId, dbo.Employee.Code, dbo.Employee.Description, dbo.Employee.FirstName, dbo.Employee.Surname, 
+						CASE WHEN dbo.Employee.EmployeeType = 0 THEN 'Asset Manager' 
+							 WHEN dbo.Employee.EmployeeType = 1 THEN 'Server' 
+							 WHEN dbo.Employee.EmployeeType = 2 THEN 'Cashier' 
+							 WHEN dbo.Employee.EmployeeType = 3 THEN 'Manager' 
+							 WHEN dbo.Employee.EmployeeType = 4 THEN 'Administrator' 
+						END AS EmployeeTypeDescription, dbo.Employee.DateStarted, dbo.Employee.HomeTelephone, dbo.Employee.CellNumber, dbo.Employee.IDNumber, dbo.Employee.InactiveEmployee, 
+						CASE WHEN dbo.Employee.InactiveEmployee = 0 THEN '' 
+							 WHEN dbo.Employee.InactiveEmployee = 1 THEN 'Inactive' 
+						END AS InactiveEmployeeDescription
+FROM            dbo.Employee 
+
+GO
+
+--------------------------------------------------------
+ALTER TABLE Asset
+Add AttachmentAndLocation varchar(255) NULL
+GO
+
+ALTER TABLE Serviced
+Add AttachmentAndLocation varchar(255) NULL
+GO
+
+--------------------------------------------------------
+--------------------------------------------------------
+USE [CM]
+GO
+
+--Drop Table [dbo].[Branch]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Branch](
+	[RecordId] [int] IDENTITY(1,1) NOT NULL,
+	[BranchCode] [varchar](5) NOT NULL,
+	[Description] [varchar](100) NOT NULL,
+	[EmployeeRecordId] [int] NOT NULL,
+ CONSTRAINT [PK_Branch_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_Task_Branch_Key] UNIQUE NONCLUSTERED 
+(
+	[BranchCode] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Task]  WITH CHECK ADD  CONSTRAINT [FK_Branch_Employee_EmployeeRecordId] FOREIGN KEY([EmployeeRecordId])
+REFERENCES [dbo].[Employee] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[Task] CHECK CONSTRAINT [FK_Branch_Employee_EmployeeRecordId]
+GO
+
+--------------------------------------------------------
+USE [CM]
+GO
+
+--Drop View [dbo].[BranchView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[BranchView]
+AS
+SELECT		dbo.Branch.RecordId, dbo.Branch.BranchCode, dbo.Branch.Description, dbo.Branch.EmployeeRecordId, 
+						dbo.Employee.FirstName + ' ' + dbo.Employee.Surname AS EmployeeName
+FROM		dbo.Branch INNER JOIN
+                        dbo.Employee ON dbo.Branch.EmployeeRecordId = dbo.Employee.RecordId
+GO
+
+--------------------------------------------------------
+ALTER TABLE Employee
+ADD BranchCode varchar(5) NULL
+GO
+UPDATE Employee
+SET BranchCode = ''
+GO
+ALTER TABLE Employee
+ALTER Column BranchCode varchar(5) NOT NULL
+GO
+--------------------------------------------------------
+--------------------------------------------------------
+New
+---
+use PC
+GO
+
+--select * from asset
+ALTER TABLE Asset
+ADD Quantity int NULL
+GO
+
+UPDATE Asset
+SET Quantity = 1
+GO
+
+ALTER TABLE Asset
+ALTER Column Quantity Int NOT NULL
+GO
+--------------------------------------------------------
+use PC
+GO
+
+Drop View [dbo].[AssetView]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[AssetView]
+AS
+SELECT		dbo.Asset.RecordId, dbo.Asset.BranchCode, dbo.Asset.Description, dbo.Asset.SerialNumber, 
+						dbo.Asset.PurchaseDate, dbo.Asset.Quantity, dbo.Asset.PurchaseAmount, 
+						(dbo.Asset.Quantity * dbo.Asset.PurchaseAmount) as TotalAmount, dbo.Asset.SaleDate, 
+						dbo.Asset.SaleAmount, dbo.Asset.Memo, dbo.Asset.EmployeeRecordId, 
+						dbo.Employee.FirstName + ' ' + dbo.Employee.Surname AS EmployeeName
+FROM		dbo.Asset INNER JOIN
+                        dbo.Employee ON dbo.Asset.EmployeeRecordId = dbo.Employee.RecordId
+GO
+--------------------------------------------------------
+use PC
+GO
+
+ALTER TABLE [dbo].[Asset] DROP CONSTRAINT [UQ_Asset_Branch_Description_Key]
+GO
+--------------------------------------------------------
+--------------------------------------------------------

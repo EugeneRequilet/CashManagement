@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="PC" Class="AssetViewDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(local)\SQLEXPRESS;Initial Catalog=PC;Integrated Security=True;MultipleActiveResultSets=True" SettingsObjectName="CashManagement.My.MySettings" SettingsPropertyName="CMConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.AssetView" Member="AssetViews">
+    <Type Name="AssetView">
+      <Column Name="RecordId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BranchCode" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SerialNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PurchaseDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PurchaseAmount" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalAmount" Type="System.Decimal" DbType="Decimal(24,2)" CanBeNull="true" />
+      <Column Name="SaleDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="SaleAmount" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Memo" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="EmployeeRecordId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeName" Type="System.String" DbType="VarChar(51)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

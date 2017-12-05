@@ -1,0 +1,1866 @@
+﻿USE [master]
+GO
+
+/****** Object:  Database [CM]    Script Date: 11/05/2014 09:17:42 ******/
+CREATE DATABASE [CM] ON  PRIMARY 
+( NAME = N'CM', FILENAME = N'c:\Program Files (x86)\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\CM.mdf' , SIZE = 3072KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+ LOG ON 
+( NAME = N'CM_log', FILENAME = N'c:\Program Files (x86)\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\CM_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+GO
+
+ALTER DATABASE [CM] SET COMPATIBILITY_LEVEL = 100
+GO
+
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [CM].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+
+ALTER DATABASE [CM] SET ANSI_NULL_DEFAULT OFF 
+GO
+
+ALTER DATABASE [CM] SET ANSI_NULLS OFF 
+GO
+
+ALTER DATABASE [CM] SET ANSI_PADDING OFF 
+GO
+
+ALTER DATABASE [CM] SET ANSI_WARNINGS OFF 
+GO
+
+ALTER DATABASE [CM] SET ARITHABORT OFF 
+GO
+
+ALTER DATABASE [CM] SET AUTO_CLOSE OFF 
+GO
+
+ALTER DATABASE [CM] SET AUTO_CREATE_STATISTICS ON 
+GO
+
+ALTER DATABASE [CM] SET AUTO_SHRINK OFF 
+GO
+
+ALTER DATABASE [CM] SET AUTO_UPDATE_STATISTICS ON 
+GO
+
+ALTER DATABASE [CM] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+
+ALTER DATABASE [CM] SET CURSOR_DEFAULT  GLOBAL 
+GO
+
+ALTER DATABASE [CM] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+
+ALTER DATABASE [CM] SET NUMERIC_ROUNDABORT OFF 
+GO
+
+ALTER DATABASE [CM] SET QUOTED_IDENTIFIER OFF 
+GO
+
+ALTER DATABASE [CM] SET RECURSIVE_TRIGGERS OFF 
+GO
+
+ALTER DATABASE [CM] SET  DISABLE_BROKER 
+GO
+
+ALTER DATABASE [CM] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+
+ALTER DATABASE [CM] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+
+ALTER DATABASE [CM] SET TRUSTWORTHY OFF 
+GO
+
+ALTER DATABASE [CM] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+
+ALTER DATABASE [CM] SET PARAMETERIZATION SIMPLE 
+GO
+
+ALTER DATABASE [CM] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+
+ALTER DATABASE [CM] SET HONOR_BROKER_PRIORITY OFF 
+GO
+
+ALTER DATABASE [CM] SET  READ_WRITE 
+GO
+
+ALTER DATABASE [CM] SET RECOVERY SIMPLE 
+GO
+
+ALTER DATABASE [CM] SET  MULTI_USER 
+GO
+
+ALTER DATABASE [CM] SET PAGE_VERIFY CHECKSUM  
+GO
+
+ALTER DATABASE [CM] SET DB_CHAINING OFF 
+GO
+
+--=========================================================
+
+USE [CM]
+GO
+
+--Drop Table [dbo].[FirmDetails]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[FirmDetails](
+	[RecordId] [int] NOT NULL,
+	[FirmName] [varchar](50) NOT NULL,
+	[Telephone] [varchar](15) NULL,
+	[CellNumber] [varchar](15) NULL,
+	[PhysicalAddress1] [varchar](30) NULL,
+	[PhysicalAddress2] [varchar](30) NULL,
+	[PhysicalAddress3] [varchar](30) NULL,
+	[PhysicalCode] [varchar](4) NULL,
+	[PostalAddress1] [varchar](30) NULL,
+	[PostalAddress2] [varchar](30) NULL,
+	[PostalAddress3] [varchar](30) NULL,
+	[PostalCode] [varchar](4) NULL,
+	[BankName] [varchar](30) NULL,
+	[BranchName] [varchar](30) NULL,
+	[BranchNumber] [varchar](20) NULL,
+	[AccountNumber] [varchar](20) NULL,
+	[AccountType] [varchar](30) NULL,
+	[FloatRequired] [decimal](13, 2) NOT NULL,
+	[GrossSalesHighlight] [decimal](13, 2) NOT NULL,
+	[GrossCashupDifHighlight] [decimal](13, 2) NOT NULL,
+	[OverbakeHighlight] [decimal](13, 2) NOT NULL,
+	[DiscountHighlight] [decimal](13, 2) NOT NULL,
+	[StaffMealHighlight] [decimal](13, 2) NOT NULL,
+	[GeneralDefaultDirectory] [varchar](255) NULL,
+	[SQLBackupDefaultDirectory] [varchar](255) NULL,
+	[HoursPerShift] [decimal](13, 2) NOT NULL,
+	[AttachmentDirectory] [varchar](255) NULL,
+
+ CONSTRAINT [PK_FirmDetails_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+--------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop Table [dbo].[Employee]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Employee](
+	[RecordId] [int] IDENTITY(1,1) NOT NULL,
+	[Description]  AS ((isnull([Firstname],'')+' ')+isnull([Surname],'')),
+	[Code] [varchar](5) NOT NULL,
+	[Password] [varchar](20) NOT NULL,
+	[FirstName] [varchar](20) NOT NULL,
+	[Surname] [varchar](30) NULL,
+	[IDNumber] [varchar](20) NULL,
+	[Gender] [varchar](1) NOT NULL,
+	[MaritalStatus] [varchar](50) NOT NULL,
+	[NoOfDependants] [int] NULL,
+	[DateStarted] [date] NULL,
+	[Rate] [decimal](13, 2) NULL,
+	[HomeTelephone] [varchar](15) NULL,
+	[CellNumber] [varchar](15) NULL,
+	[ResdentialAddress1] [varchar](30) NULL,
+	[ResdentialAddress2] [varchar](30) NULL,
+	[ResdentialAddress3] [varchar](30) NULL,
+	[ResdentialCode] [varchar](4) NULL,
+	[PostalAddress1] [varchar](30) NULL,
+	[PostalAddress2] [varchar](30) NULL,
+	[PostalAddress3] [varchar](30) NULL,
+	[PostalCode] [varchar](4) NULL,
+	[BankName] [varchar](20) NULL,
+	[BranchName] [varchar](20) NULL,
+	[BranchNumber] [varchar](20) NULL,
+	[AccountNumber] [varchar](20) NULL,
+	[AccountType] [varchar](20) NULL,
+	[InactiveEmployee] [Integer] NOT NULL,
+	[EmployeeType] [int] NOT NULL,
+	[TaxNumber] [varchar](20) NULL,
+	[ContactName] [varchar](20) NULL,
+	[ContactRelationship] [varchar](20) NULL,
+	[ContactPhone] [varchar](15) NULL,
+	[YTDLeaveDaysTaken] [decimal](13, 2) NOT NULL,
+	[YTDLeaveMemo] [varchar](255) NULL,
+	[YTDSickDaysTaken] [decimal](13, 2) NOT NULL,
+	[BranchCode] [varchar](5) NOT NULL,
+
+ CONSTRAINT [PK_Employee_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_Employee_Code_Key] UNIQUE NONCLUSTERED 
+(
+	[Code] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_Employee_Name_Key] UNIQUE NONCLUSTERED 
+(
+	[Surname] ASC,
+	[FirstName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Employee] ADD  CONSTRAINT [DF_Employee_InactiveEmployee]  DEFAULT ((0)) FOR [InactiveEmployee]
+GO
+
+ALTER TABLE [dbo].[Employee] ADD  DEFAULT ((0)) FOR [EmployeeType]
+GO
+
+----
+ALTER TABLE sales 
+ADD ChecksPaid int NOT NULL DEFAULT 0, ErrorCorrects int NOT NULL DEFAULT 0, ErrorCorrectsValue decimal(13, 2) NOT NULL DEFAULT 0.0, Void int NOT NULL DEFAULT 0, VoidsValue decimal(13, 2) NOT NULL DEFAULT 0.0
+
+----------------------------------------------------------------
+USE [CM]
+GO
+
+--Drop Table [dbo].[Branch]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Branch](
+	[RecordId] [int] IDENTITY(1,1) NOT NULL,
+	[BranchCode] [varchar](5) NOT NULL,
+	[Description] [varchar](100) NOT NULL,
+	[EmployeeRecordId] [int] NOT NULL,
+ CONSTRAINT [PK_Branch_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_Task_Branch_Key] UNIQUE NONCLUSTERED 
+(
+	[BranchCode] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Task]  WITH CHECK ADD  CONSTRAINT [FK_Branch_Employee_EmployeeRecordId] FOREIGN KEY([EmployeeRecordId])
+REFERENCES [dbo].[Employee] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[Task] CHECK CONSTRAINT [FK_Branch_Employee_EmployeeRecordId]
+GO
+
+----------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop Table [dbo].[Sales]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Sales](
+	[RecordId] [int] IDENTITY(1,1) NOT NULL,
+	[Date] [date] NOT NULL,
+	[GrossSales] [decimal](13, 2) NOT NULL,
+	[Payout] [decimal](13, 2) NOT NULL,
+	[TurnoverCash] [decimal](13, 2) NOT NULL,
+	[TurnoverCreditCard] [decimal](13, 2) NOT NULL,
+	[TurnoverOther] [decimal](13, 2) NOT NULL,
+	[StaffPercent100] [decimal](13, 2) NOT NULL,
+	[DiscountPercent20] [decimal](13, 2) NOT NULL,
+	[WastagePercent100] [decimal](13, 2) NOT NULL,
+	[PromoPercent100] [decimal](13, 2) NOT NULL,
+	[OverbakePercent100] [decimal](13, 2) NOT NULL,
+	[DamagePercent100] [decimal](13, 2) NOT NULL,
+	[SamplePercent100] [decimal](13, 2) NOT NULL,
+	[StockVarianceValue] [decimal](13, 2) NOT NULL,
+	[Memo] [varchar](255) NULL,
+	[EmployeeRecordId] [int] NOT NULL,
+	[ChecksPaid] [int] NOT NULL,
+	[ErrorCorrects] [int] NOT NULL,
+	[ErrorCorrectsValue] [decimal](13, 2) NOT NULL,
+	[Void] [int] NOT NULL,
+	[VoidsValue] [decimal](13, 2) NOT NULL,
+ CONSTRAINT [PK_Sales_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_Sales_Date_Key] UNIQUE NONCLUSTERED 
+(
+	[Date] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Sales]  WITH CHECK ADD  CONSTRAINT [FK_Sales_Employee_EmployeeRecordId] FOREIGN KEY([EmployeeRecordId])
+REFERENCES [dbo].[Employee] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[Sales] CHECK CONSTRAINT [FK_Sales_Employee_EmployeeRecordId]
+GO
+
+--------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop Table [dbo].[CashUp]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[CashUp](
+	[RecordId] [int] IDENTITY(1,1) NOT NULL,
+	[Date] [date] NOT NULL,
+	[Time] [int] NOT NULL,
+	[EmployeeRecordId] [int] NOT NULL,
+	[R200] [int] NOT NULL,
+	[R100] [int] NOT NULL,
+	[R50] [int] NOT NULL,
+	[R20] [int] NOT NULL,
+	[R10] [int] NOT NULL,
+	[R5] [int] NOT NULL,
+	[R2] [int] NOT NULL,
+	[R1] [int] NOT NULL,
+	[C50] [int] NOT NULL,
+	[C20] [int] NOT NULL,
+	[C10] [int] NOT NULL,
+	[CalculatedTillTotal]  AS (CONVERT([decimal](13,2),((((((((([R200]*(200)+[R100]*(100))+[R50]*(50))+[R20]*(20))+[R10]*(10))+[R5]*(5))+[R2]*(2))+[R1]*(1))+[C50]*(0.5))+[C20]*(0.2))+[C10]*(0.1),(0))),
+	[FloatR200] [int] NOT NULL,
+	[FloatR100] [int] NOT NULL,
+	[FloatR50] [int] NOT NULL,
+	[FloatR20] [int] NOT NULL,
+	[FloatR10] [int] NOT NULL,
+	[FloatR5] [int] NOT NULL,
+	[FloatR2] [int] NOT NULL,
+	[FloatR1] [int] NOT NULL,
+	[FloatC50] [int] NOT NULL,
+	[FloatC20] [int] NOT NULL,
+	[FloatC10] [int] NOT NULL,
+	[CalculatedFloatTotal]  AS (CONVERT([decimal](13,2),((((((((([FloatR200]*(200)+[FloatR100]*(100))+[FloatR50]*(50))+[FloatR20]*(20))+[FloatR10]*(10))+[FloatR5]*(5))+[FloatR2]*(2))+[FloatR1]*(1))+[FloatC50]*(0.5))+[FloatC20]*(0.2))+[FloatC10]*(0.1),(0))),
+	[DepRedByR200] [int] NOT NULL,
+	[DepRedByR100] [int] NOT NULL,
+	[DepRedByR50] [int] NOT NULL,
+	[DepRedByR20] [int] NOT NULL,
+	[DepRedByR10] [int] NOT NULL,
+	[DepRedByR5] [int] NOT NULL,
+	[DepRedByR2] [int] NOT NULL,
+	[DepRedByR1] [int] NOT NULL,
+	[DepRedByC50] [int] NOT NULL,
+	[DepRedByC20] [int] NOT NULL,
+	[DepRedByC10] [int] NOT NULL,
+	[CalDepReducedByTotal]  AS (CONVERT([decimal](13,2),((((((((([DepRedByR200]*(200)+[DepRedByR100]*(100))+[DepRedByR50]*(50))+[DepRedByR20]*(20))+[DepRedByR10]*(10))+[DepRedByR5]*(5))+[DepRedByR2]*(2))+[DepRedByR1]*(1))+[DepRedByC50]*(0.5))+[DepRedByC20]*(0.2))+[DepRedByC10]*(0.1),(0))),
+	[DepIncByR200] [int] NOT NULL,
+	[DepIncByR100] [int] NOT NULL,
+	[DepIncByR50] [int] NOT NULL,
+	[DepIncByR20] [int] NOT NULL,
+	[DepIncByR10] [int] NOT NULL,
+	[DepIncByR5] [int] NOT NULL,
+	[DepIncByR2] [int] NOT NULL,
+	[DepIncByR1] [int] NOT NULL,
+	[DepIncByC50] [int] NOT NULL,
+	[DepIncByC20] [int] NOT NULL,
+	[DepIncByC10] [int] NOT NULL,
+	[CalDepIncreasedByTotal]  AS (CONVERT([decimal](13,2),((((((((([DepIncByR200]*(200)+[DepIncByR100]*(100))+[DepIncByR50]*(50))+[DepIncByR20]*(20))+[DepIncByR10]*(10))+[DepIncByR5]*(5))+[DepIncByR2]*(2))+[DepIncByR1]*(1))+[DepIncByC50]*(0.5))+[DepIncByC20]*(0.2))+[DepIncByC10]*(0.1),(0))),
+	[CashDepReconciled] [bit] NOT NULL,
+	[TotalCreditCard] [decimal](13, 2) NOT NULL,
+	[CreditCardReconciled] [bit] NOT NULL,
+	[DepositedSkim1] [decimal](13, 2) NOT NULL,
+	[Skims1Reconciled] [bit] NOT NULL,
+	[DepositedSkim2] [decimal](13, 2) NOT NULL,
+	[Skims2Reconciled] [bit] NOT NULL,
+	[DepositedSkim3] [decimal](13, 2) NOT NULL,
+	[Skims3Reconciled] [bit] NOT NULL,
+	[TotalDepositSkims]  AS (CONVERT([decimal](13,2),([DepositedSkim1]+[DepositedSkim2])+[DepositedSkim3],(0))),
+	[Payout1] [decimal](13, 2) NOT NULL,
+	[PayoutReason1] [varchar](30) NULL,
+	[Payout2] [decimal](13, 2) NOT NULL,
+	[PayoutReason2] [varchar](30) NULL,
+	[Payout3] [decimal](13, 2) NOT NULL,
+	[PayoutReason3] [varchar](30) NULL,
+	[Payout4] [decimal](13, 2) NOT NULL,
+	[PayoutReason4] [varchar](30) NULL,
+	[Payout5] [decimal](13, 2) NOT NULL,
+	[PayoutReason5] [varchar](30) NULL,
+	[Payout6] [decimal](13, 2) NOT NULL,
+	[PayoutReason6] [varchar](30) NULL,
+	[TotalPayouts]  AS (CONVERT([decimal](13,2),(((([Payout1]+[Payout2])+[Payout3])+[Payout4])+[Payout5])+[Payout6],(0))),
+	[CashupVariance] [decimal](13, 2) NOT NULL,
+	[SalesType] [int] NOT NULL,
+	[PaymentType] [int] NOT NULL,
+ CONSTRAINT [PK_CashUp_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_Cashup_Key] UNIQUE NONCLUSTERED 
+(
+	[Date] ASC,
+	[Time] ASC,
+	[EmployeeRecordId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[CashUp]  WITH CHECK ADD  CONSTRAINT [FK_CashUp_Employee_EmployeeRecordId] FOREIGN KEY([EmployeeRecordId])
+REFERENCES [dbo].[Employee] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[CashUp] CHECK CONSTRAINT [FK_CashUp_Employee_EmployeeRecordId]
+GO
+
+--------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop Table [dbo].[Banking]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Banking](
+	[RecordId] [int] IDENTITY(1,1) NOT NULL,
+	[Date] [date] NOT NULL,
+	[BankingType] [char](1) NOT NULL,
+	[Amount] [decimal](13, 2) NOT NULL,
+	[Balance] [decimal](13, 2) NULL,
+	[Reconciled] [bit] NOT NULL,
+	[Memo] [varchar](255) NULL,
+	[Number] [int] NULL,
+	[EmployeeRecordId] [int] NOT NULL,
+ CONSTRAINT [PK_Banking_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_Banking_Key] UNIQUE NONCLUSTERED 
+(
+	[Date] ASC,
+	[BankingType] ASC,
+	[Amount] ASC,
+	[Balance] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Banking]  WITH CHECK ADD  CONSTRAINT [FK_Banking_Employee_EmployeeRecordId] FOREIGN KEY([EmployeeRecordId])
+REFERENCES [dbo].[Employee] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[Banking] CHECK CONSTRAINT [FK_Banking_Employee_EmployeeRecordId]
+GO
+
+--------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop Table [dbo].[Supplier]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Supplier](
+	[RecordId] [int] IDENTITY(1,1) NOT NULL,
+	[Description] [varchar](30) NOT NULL,
+	[Telephone] [varchar](15) NULL,
+	[CellNumber] [varchar](15) NULL,
+	[PhysicalAddress1] [varchar](30) NULL,
+	[PhysicalAddress2] [varchar](30) NULL,
+	[PhysicalAddress3] [varchar](30) NULL,
+	[PhysicalCode] [varchar](4) NULL,
+	[PostalAddress1] [varchar](30) NULL,
+	[PostalAddress2] [varchar](30) NULL,
+	[PostalAddress3] [varchar](30) NULL,
+	[PostalCode] [varchar](4) NULL,
+	[BankName] [varchar](20) NULL,
+	[BranchName] [varchar](20) NULL,
+	[BranchNumber] [varchar](20) NULL,
+	[AccountNumber] [varchar](20) NULL,
+	[AccountType] [varchar](20) NULL,
+	[InactiveSupplier] [Integer] NOT NULL,
+	[COS] [Integer] NOT NULL,
+ CONSTRAINT [PK_Supplier_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_Supplier_Description_Key] UNIQUE NONCLUSTERED 
+(
+	[Description] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Supplier] ADD  CONSTRAINT [DF_Supplier_InactiveSupplier]  DEFAULT ((0)) FOR [InactiveSupplier]
+GO
+
+--------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop Table [dbo].[Invoice]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Invoice](
+	[RecordId] [int] IDENTITY(1,1) NOT NULL,
+	[Date] [date] NOT NULL,
+	[DocumentType] [char](1) NOT NULL,
+	[DocumentNumber] [varchar](20) NOT NULL,
+	[Amount] [decimal](13, 2) NOT NULL,
+	[Memo] [varchar](255) NULL,
+	[EmployeeRecordId] [int] NOT NULL,
+	[SupplierRecordId] [int] NOT NULL,
+ CONSTRAINT [PK_Invoice_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_Invoice_Key] UNIQUE NONCLUSTERED 
+(
+	[Date] ASC,
+	[SupplierRecordId] ASC,
+	[DocumentType] ASC,
+	[DocumentNumber] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Invoice] ADD  DEFAULT ((0)) FOR [SupplierRecordId]
+GO
+
+ALTER TABLE [dbo].[Invoice]  WITH CHECK ADD  CONSTRAINT [FK_Invoice_Employee_EmployeeRecordId] FOREIGN KEY([EmployeeRecordId])
+REFERENCES [dbo].[Employee] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[Invoice] CHECK CONSTRAINT [FK_Invoice_Employee_EmployeeRecordId]
+GO
+
+ALTER TABLE [dbo].[Invoice]  WITH CHECK ADD  CONSTRAINT [FK_Invoice_Supplier_SupplierRecordId] FOREIGN KEY([SupplierRecordId])
+REFERENCES [dbo].[Supplier] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[Invoice] CHECK CONSTRAINT [FK_Invoice_Supplier_SupplierRecordId]
+GO
+
+--------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop Table [dbo].[AdjustmentRequested]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[AdjustmentRequested](
+	[RecordId] [int] IDENTITY(1,1) NOT NULL,
+	[Date] [date] NOT NULL,
+	[InvoiceNumber] [varchar](20) NOT NULL,
+	[DocumentType] [char](1) NOT NULL,
+	[Reconciled] [bit] NOT NULL,
+	[Amount] [decimal](13, 2) NOT NULL,
+	[Memo] [varchar](255) NULL,
+	[EmployeeRecordId] [int] NOT NULL,
+	[SupplierRecordId] [int] NOT NULL,
+ CONSTRAINT [PK_AdjustmentRequested_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_AdjustmentRequested_Key] UNIQUE NONCLUSTERED 
+(
+	[Date] ASC,
+	[SupplierRecordId] ASC,
+	[InvoiceNumber] ASC,
+	[DocumentType] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[AdjustmentRequested]  WITH CHECK ADD  CONSTRAINT [FK_AdjustmentRequested_Employee_EmployeeRecordId] FOREIGN KEY([EmployeeRecordId])
+REFERENCES [dbo].[Employee] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[AdjustmentRequested] CHECK CONSTRAINT [FK_AdjustmentRequested_Employee_EmployeeRecordId]
+GO
+
+ALTER TABLE [dbo].[AdjustmentRequested]  WITH CHECK ADD  CONSTRAINT [FK_AdjustmentRequested_Supplier_SupplierRecordId] FOREIGN KEY([SupplierRecordId])
+REFERENCES [dbo].[Supplier] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[AdjustmentRequested] CHECK CONSTRAINT [FK_AdjustmentRequested_Supplier_SupplierRecordId]
+GO
+
+-----------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop Table [dbo].[AdjustmentTransaction]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[AdjustmentTransaction](
+	[RecordId] [int] IDENTITY(1,1) NOT NULL,
+	[InventoryDescription] [varchar](50) NULL,
+	[Quantity] [decimal](13, 2) NOT NULL,
+	[CostPrice] [decimal](13, 2) NOT NULL,
+	[CalcAmount]  AS (CONVERT([decimal](13,2),([Quantity]*[CostPrice]),(0))),
+	[Memo] [varchar](255) NULL,
+	[EmployeeRecordId] [int] NOT NULL,
+	[AdjustmentRequestedRecordId] [int] NOT NULL,
+ CONSTRAINT [PK_AdjustmentTransaction_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_AdjustmentTransaction_Key] UNIQUE NONCLUSTERED 
+(
+	[AdjustmentRequestedRecordId] ASC,
+	[RecordId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[AdjustmentTransaction]  WITH CHECK ADD  CONSTRAINT [FK_AdjustmentTransaction_Employee_EmployeeRecordId] FOREIGN KEY([EmployeeRecordId])
+REFERENCES [dbo].[Employee] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[AdjustmentTransaction] CHECK CONSTRAINT [FK_AdjustmentTransaction_Employee_EmployeeRecordId]
+GO
+
+ALTER TABLE [dbo].[AdjustmentTransaction]  WITH CHECK ADD  CONSTRAINT [FK_AdjustmentTransaction_AdjustmentRequested_AdjustmentRequestedRecordId] FOREIGN KEY([AdjustmentRequestedRecordId])
+REFERENCES [dbo].[AdjustmentRequested] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[AdjustmentTransaction] CHECK CONSTRAINT [FK_AdjustmentTransaction_AdjustmentRequested_AdjustmentRequestedRecordId]
+GO
+
+-----------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop Table [dbo].[Inventory]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Inventory](
+	[RecordId] [int] IDENTITY(1,1) NOT NULL,
+	[Description] [varchar](50) NOT NULL,
+	[CostPrice] [decimal](13, 2) NOT NULL,
+	[SellingPrice] [decimal](13, 2) NOT NULL,
+	[SupplierId] [Int] NOT NULL,
+	[InactiveInventory] [Integer] NOT NULL,
+	[Dated] [DateTime] NOT NULL,
+ CONSTRAINT [PK_Inventory_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_Inventory_Description_Key] UNIQUE NONCLUSTERED 
+(
+	[SupplierId] ASC,
+	[Description] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Inventory]  WITH CHECK ADD  CONSTRAINT [FK_Inventory_Supplier_SupplierRecordId] FOREIGN KEY([SupplierId])
+REFERENCES [dbo].[Supplier] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[Inventory] CHECK CONSTRAINT [FK_Inventory_Supplier_SupplierRecordId]
+GO
+
+ALTER TABLE [dbo].[Inventory] ADD  CONSTRAINT [DF_Inventory_InactiveInventory]  DEFAULT ((0)) FOR [InactiveInventory]
+GO
+
+-----------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop Table [dbo].[DefaultShift]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[DefaultShift](
+	[RecordId] [int] IDENTITY(1,1) NOT NULL,
+	[Description] [varchar](30) NOT NULL,
+	[StartTime] [datetime] NOT NULL,
+	[EndTime] [datetime] NOT NULL,
+	[Hours] AS (CONVERT([time],([EndTime]-[StartTime]),(0))),
+	[EmployeeRecordId] [int] NOT NULL,
+
+ CONSTRAINT [PK_DefaultShift_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_DefaultShift_Description_Key] UNIQUE NONCLUSTERED 
+(
+	[Description] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[DefaultShift]  WITH CHECK ADD  CONSTRAINT [FK_DefaultShift_Employee_EmployeeRecordId] FOREIGN KEY([EmployeeRecordId])
+REFERENCES [dbo].[Employee] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[DefaultShift] CHECK CONSTRAINT [FK_DefaultShift_Employee_EmployeeRecordId]
+GO
+
+-----------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop Table [dbo].[DailyShiftHeader]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[DailyShiftHeader](
+	[RecordId] [int] IDENTITY(1,1) NOT NULL,
+	[Date] [date] NOT NULL,
+	[DayOfWeek] [varchar](10) NOT NULL,
+	[Shifts] [int] NOT NULL,
+	[DailyRateAdjustment] [int] NOT NULL,
+	[Memo] [varchar](255) NULL,
+	[EmployeeRecordId] [int] NOT NULL,
+
+ CONSTRAINT [PK_DailyShiftHeader_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_DailyShiftHeader_Date_Key] UNIQUE NONCLUSTERED 
+(
+	[Date] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[DailyShiftHeader]  WITH CHECK ADD  CONSTRAINT [FK_DailyShiftHeader_Employee_EmployeeRecordId] FOREIGN KEY([EmployeeRecordId])
+REFERENCES [dbo].[Employee] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[DailyShiftHeader] CHECK CONSTRAINT [FK_DailyShiftHeader_Employee_EmployeeRecordId]
+GO
+
+-----------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop Table [dbo].[DailyShift]
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[DailyShift](
+	[RecordId] [int] IDENTITY(1,1) NOT NULL,
+	[DailyShiftHeaderRecordId] [int] NOT NULL,
+	[Date] [date] NOT NULL,
+	[StartTime] [datetime] NOT NULL,
+	[EndTime] [datetime] NOT NULL,
+	[Hours]  AS (CONVERT([time],[EndTime]-[StartTime],(0))),
+	[ThisShiftEmployeeRecordId] [int] NOT NULL,
+	[EmployeeRecordId] [int] NOT NULL,
+	[DefaultShiftRecordId] [int] NOT NULL,
+	[EmployeeStartTime] [datetime] NOT NULL,
+	[EmployeeEndTime] [datetime] NOT NULL,
+	[EmployeeHours]  AS (CONVERT([time],[EmployeeEndTime]-[EmployeeStartTime],(0))),
+	[Memo] [varchar](255) NULL,
+	[ClockStartTime] [datetime] NOT NULL,
+	[ClockEndTime] [datetime] NOT NULL,
+
+ CONSTRAINT [PK_DailyShift_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+)  WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ALTER TABLE [dbo].[DailyShift] ADD 
+ CONSTRAINT [UQ_DailyShift_DateDefaultShift_Key] UNIQUE NONCLUSTERED 
+(
+	[Date] ASC, 
+	[DefaultShiftRecordId] ASC 
+) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[DailyShift]  WITH CHECK ADD CONSTRAINT [FK_DailyShift_Employee_EmployeeRecordId] FOREIGN KEY([EmployeeRecordId])
+REFERENCES [dbo].[Employee] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[DailyShift] CHECK CONSTRAINT [FK_DailyShift_Employee_EmployeeRecordId]
+GO
+
+ALTER TABLE [dbo].[DailyShift] WITH CHECK ADD CONSTRAINT [FK_DailyShift_DefaultShift_DefaultShiftRecordId] FOREIGN KEY([DefaultShiftRecordId])
+REFERENCES [dbo].[DefaultShift] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[DailyShift] CHECK CONSTRAINT [FK_DailyShift_DefaultShift_DefaultShiftRecordId]
+GO
+
+-----------------------------------------------------------------------
+USE [CM]
+GO
+
+--Drop Table [dbo].[Task]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Task](
+	[RecordId] [int] IDENTITY(1,1) NOT NULL,
+	[GroupNumber] [int] NOT NULL,
+	[Number] [int] NOT NULL,
+	[Description] [varchar](255) NOT NULL,
+	[EmployeeRecordId] [int] NOT NULL,
+ CONSTRAINT [PK_Task_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_Task_Description_Key] UNIQUE NONCLUSTERED 
+(
+	[GroupNumber] ASC,
+	[Number] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Task]  WITH CHECK ADD  CONSTRAINT [FK_Task_Employee_EmployeeRecordId] FOREIGN KEY([EmployeeRecordId])
+REFERENCES [dbo].[Employee] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[Task] CHECK CONSTRAINT [FK_Task_Employee_EmployeeRecordId]
+GO
+
+-----------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop Table [dbo].[TaskHeader]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[TaskHeader](
+	[RecordId] [int] IDENTITY(1,1) NOT NULL,
+	[Date] [date] NOT NULL,
+	[DayOfWeek] [varchar](10) NOT NULL,
+	[GroupNumber] [int] NOT NULL,
+	[Tasks] [int] NOT NULL,
+	[Memo] [varchar](255) NULL,
+	[EmployeeRecordId] [int] NOT NULL,
+
+ CONSTRAINT [PK_TaskHeader_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_TaskHeader_DateGroupNumber_Key] UNIQUE NONCLUSTERED 
+(
+	[Date] ASC,
+	[GroupNumber] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[TaskHeader]  WITH CHECK ADD  CONSTRAINT [FK_TaskHeader_Employee_EmployeeRecordId] FOREIGN KEY([EmployeeRecordId])
+REFERENCES [dbo].[Employee] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[TaskHeader] CHECK CONSTRAINT [FK_TaskHeader_Employee_EmployeeRecordId]
+GO
+
+-----------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop Table [dbo].[GroupTask]
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[GroupTask](
+	[RecordId] [int] IDENTITY(1,1) NOT NULL,
+	[TaskHeaderRecordId] [int] NOT NULL,
+	[Date] [date] NOT NULL,
+	[GroupNumber] [int] NOT NULL,
+	[TaskNumber] [int] NOT NULL,
+	[TaskDescription] [varchar](255) NOT NULL,
+	[CompletedTaskEmployeeRecordId] [int] NOT NULL,
+	[EmployeeRecordId] [int] NOT NULL,
+
+ CONSTRAINT [PK_GroupTask_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+)  WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_GroupTask_GroupNumberTaskNumber_Key] UNIQUE NONCLUSTERED 
+(
+	[GroupNumber] ASC,
+	[TaskNumber] ASC
+) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[GroupTask]  WITH CHECK ADD  CONSTRAINT [FK_GroupTask_Employee_EmployeeRecordId] FOREIGN KEY([EmployeeRecordId])
+REFERENCES [dbo].[Employee] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[GroupTask] CHECK CONSTRAINT [FK_GroupTask_Employee_EmployeeRecordId]
+GO
+
+-----------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop Table [dbo].[LeaveTaken]
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[LeaveTaken](
+	[RecordId] [int] IDENTITY(1,1) NOT NULL,
+	[StartDate] [date] NOT NULL,
+	[EndDate] [date] NOT NULL,
+	[Days]  AS (DATEDIFF(DAY, [StartDate], [EndDate]) + 1),
+	[LeaveType] [varchar](30) NOT NULL,
+	[LeaveTakenEmployeeRecordId] [int] NOT NULL,
+	[EmployeeRecordId] [int] NOT NULL,
+ CONSTRAINT [PK_LeaveTaken_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_LeaveTaken_Date_Key] UNIQUE NONCLUSTERED 
+(
+	[StartDate] ASC,
+	[RecordId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[LeaveTaken]  WITH CHECK ADD  CONSTRAINT [FK_LeaveTaken_Employee_EmployeeRecordId] FOREIGN KEY([EmployeeRecordId])
+REFERENCES [dbo].[Employee] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[LeaveTaken] CHECK CONSTRAINT [FK_LeaveTaken_Employee_EmployeeRecordId]
+GO
+
+-----------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop Table [dbo].[Asset]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Asset](
+	[RecordId] [int] IDENTITY(1,1) NOT NULL,
+	[BranchCode] [varchar](5) NOT NULL,
+	[Description] [varchar](50) NOT NULL,
+	[SerialNumber] [varchar](50) NULL,
+	[PurchaseDate] [date] NOT NULL,
+	[Quantity] [int] NOT NULL,
+	[PurchaseAmount] [decimal](13, 2) NOT NULL,
+	[SaleDate] [date] NOT NULL,
+	[SaleAmount] [decimal](13, 2) NOT NULL,
+	[Memo] [varchar](255) NULL,
+	[AttachmentAndLocation] [varchar](255) NULL,
+	[EmployeeRecordId] [int] NOT NULL,
+ CONSTRAINT [PK_Asset_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Asset]  WITH CHECK ADD  CONSTRAINT [FK_Asset_Employee_EmployeeRecordId] FOREIGN KEY([EmployeeRecordId])
+REFERENCES [dbo].[Employee] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[Asset] CHECK CONSTRAINT [FK_Asset_Employee_EmployeeRecordId]
+GO
+
+--------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop Table [dbo].[Serviced]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Serviced](
+	[RecordId] [int] IDENTITY(1,1) NOT NULL,
+	[Date] [date] NOT NULL,
+	[Description] [varchar](50) NOT NULL,
+	[Amount] [decimal](13, 2) NOT NULL,
+	[Memo] [varchar](255) NULL,
+	[EmployeeRecordId] [int] NOT NULL,
+	[AssetRecordId] [int] NOT NULL,
+	[AttachmentAndLocation] [varchar](255) NULL,
+
+ CONSTRAINT [PK_Serviced_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_Serviced_Key] UNIQUE NONCLUSTERED 
+(
+	[Date] ASC,
+	[Description] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Serviced] ADD  DEFAULT ((0)) FOR [AssetRecordId]
+GO
+
+ALTER TABLE [dbo].[Serviced]  WITH CHECK ADD  CONSTRAINT [FK_Serviced_Employee_EmployeeRecordId] FOREIGN KEY([EmployeeRecordId])
+REFERENCES [dbo].[Employee] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[Serviced] CHECK CONSTRAINT [FK_Serviced_Employee_EmployeeRecordId]
+GO
+
+ALTER TABLE [dbo].[Serviced]  WITH CHECK ADD CONSTRAINT [FK_Serviced_Asset_AssetRecordId] FOREIGN KEY([AssetRecordId])
+REFERENCES [dbo].[Asset] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[Serviced] CHECK CONSTRAINT [FK_Serviced_Asset_AssetRecordId]
+GO
+
+----------------------------------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop Table [dbo].[Attachment]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Attachment](
+	[RecordId] [int] IDENTITY(1,1) NOT NULL,
+	[Date] [date] NOT NULL,
+	[Description] [varchar](50) NOT NULL,
+	[FileAndLocation] [varchar](255) NULL,
+	[EmployeeRecordId] [int] NOT NULL,
+	[AssetRecordId] [int] NOT NULL,
+ CONSTRAINT [PK_Attachment_RecordId] PRIMARY KEY CLUSTERED 
+(
+	[RecordId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_Attachment_Key] UNIQUE NONCLUSTERED 
+(
+	[Date] ASC,
+	[Description] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Attachment] ADD  DEFAULT ((0)) FOR [AssetRecordId]
+GO
+
+ALTER TABLE [dbo].[Attachment]  WITH CHECK ADD  CONSTRAINT [FK_Attachment_Employee_EmployeeRecordId] FOREIGN KEY([EmployeeRecordId])
+REFERENCES [dbo].[Employee] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[Attachment] CHECK CONSTRAINT [FK_Attachment_Employee_EmployeeRecordId]
+GO
+
+ALTER TABLE [dbo].[Attachment]  WITH CHECK ADD CONSTRAINT [FK_Attachment_Asset_AssetRecordId] FOREIGN KEY([AssetRecordId])
+REFERENCES [dbo].[Asset] ([RecordId])
+GO
+
+ALTER TABLE [dbo].[Attachment] CHECK CONSTRAINT [FK_Attachment_Asset_AssetRecordId]
+GO
+----------------------------------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop View [dbo].[EmployeeView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE VIEW [dbo].[EmployeeView]
+AS
+SELECT        dbo.Employee.RecordId, dbo.Employee.Code, dbo.Employee.Description, dbo.Employee.FirstName, dbo.Employee.Surname, 
+						CASE WHEN dbo.Employee.EmployeeType = 0 THEN 'Asset Manager' 
+							 WHEN dbo.Employee.EmployeeType = 1 THEN 'Server' 
+							 WHEN dbo.Employee.EmployeeType = 2 THEN 'Cashier' 
+							 WHEN dbo.Employee.EmployeeType = 3 THEN 'Manager' 
+							 WHEN dbo.Employee.EmployeeType = 4 THEN 'Administrator' 
+						END AS EmployeeTypeDescription, dbo.Employee.DateStarted, dbo.Employee.HomeTelephone, dbo.Employee.CellNumber, dbo.Employee.IDNumber, dbo.Employee.InactiveEmployee, 
+						CASE WHEN dbo.Employee.InactiveEmployee = 0 THEN '' 
+							 WHEN dbo.Employee.InactiveEmployee = 1 THEN 'Inactive' 
+						END AS InactiveEmployeeDescription
+FROM            dbo.Employee 
+
+GO
+
+-----------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop View [dbo].[BranchView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[BranchView]
+AS
+SELECT		dbo.Branch.RecordId, dbo.Branch.BranchCode, dbo.Branch.Description, dbo.Branch.EmployeeRecordId, 
+						dbo.Employee.FirstName + ' ' + dbo.Employee.Surname AS EmployeeName
+FROM		dbo.Branch INNER JOIN
+                        dbo.Employee ON dbo.Branch.EmployeeRecordId = dbo.Employee.RecordId
+GO
+
+-----------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop View [dbo].[SalesView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE VIEW [dbo].[SalesView]
+AS
+SELECT        dbo.Sales.RecordId, dbo.Sales.Date, dbo.Sales.GrossSales, dbo.Sales.Payout, dbo.Sales.TurnoverCash, dbo.Sales.TurnoverCreditCard, dbo.Sales.TurnoverOther, 
+                         dbo.Sales.OverbakePercent100, dbo.Sales.WastagePercent100, dbo.Sales.DamagePercent100, dbo.Sales.StaffPercent100, dbo.Sales.DiscountPercent20, 
+                         dbo.Sales.SamplePercent100, dbo.Sales.StockVarianceValue, dbo.Employee.FirstName + ' ' + dbo.Employee.Surname AS EmployeeName
+FROM            dbo.Sales INNER JOIN
+                         dbo.Employee ON dbo.Sales.EmployeeRecordId = dbo.Employee.RecordId
+
+
+
+GO
+
+---------------------------------------------------------------------------
+USE [CM]
+GO
+
+--Drop View [dbo].[CashupView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE VIEW [dbo].[CashupView]
+AS
+SELECT        dbo.CashUp.RecordId, dbo.CashUp.Date, dbo.CashUp.Time, 'Shift ' + CONVERT(Varchar(2),(Time + 1)) TimeDesc, 
+						dbo.CashUp.EmployeeRecordId, dbo.CashUp.CalculatedTillTotal AS CashInTill, 
+						dbo.CashUp.CalculatedFloatTotal AS Float, dbo.CashUp.CalculatedTillTotal - dbo.CashUp.CalculatedFloatTotal AS CashInTillLessFloat, 
+						dbo.CashUp.CalDepReducedByTotal AS DepReducedBy, dbo.CashUp.CalDepIncreasedByTotal AS DepIncreasedBy, 
+						dbo.CashUp.CalculatedTillTotal - dbo.CashUp.CalculatedFloatTotal - dbo.CashUp.CalDepReducedByTotal + dbo.CashUp.CalDepIncreasedByTotal AS CashDeposited, 
+						dbo.CashUp.TotalCreditCard AS CreditCardDeposited, dbo.CashUp.TotalDepositSkims AS DepositSkims, dbo.CashUp.TotalPayouts AS Payouts, 
+						dbo.CashUp.CashupVariance AS Variance, 
+						dbo.CashUp.SalesType, 
+						CASE WHEN dbo.CashUp.SalesType = 0 THEN 'Cash Tills' 
+							WHEN dbo.CashUp.SalesType = 1 THEN 'Accommodation' 
+							WHEN dbo.CashUp.SalesType = 2 THEN 'Other' 
+						ELSE 'Error' 
+						END AS SalesTypeDesc, 
+						dbo.CashUp.PaymentType, 
+						CASE WHEN dbo.CashUp.PaymentType = 0 THEN 'Banked' 
+							WHEN dbo.CashUp.PaymentType = 1 THEN 'Held as Cash' 
+						ELSE 'Error' 
+						END AS PaymentTypeDesc, dbo.CashUp.PayoutReason1, 
+                        dbo.Employee.FirstName + ' ' + dbo.Employee.Surname AS EmployeeName
+FROM            dbo.CashUp INNER JOIN
+                         dbo.Employee ON dbo.CashUp.EmployeeRecordId = dbo.Employee.RecordId
+
+GO
+-----------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop View [dbo].[CashupReconView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE VIEW [dbo].[CashupReconView]
+AS
+SELECT        RecordId, Date, TotalCreditCard AS CreditCardDeposited, CreditCardReconciled, 
+                         CalculatedTillTotal - CalculatedFloatTotal - CalDepReducedByTotal + CalDepIncreasedByTotal AS CashDeposited, CashDepReconciled, DepositedSkim1, 
+                         Skims1Reconciled, DepositedSkim2, Skims2Reconciled, DepositedSkim3, Skims3Reconciled, PaymentType 
+FROM            dbo.CashUp
+WHERE			PaymentType = 0
+
+
+GO
+
+-------------------------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop View [dbo].[BankingView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[BankingView]
+AS
+SELECT        dbo.Banking.RecordId, dbo.Banking.Date, CASE WHEN BankingTYpe = 'C' THEN 'Credit Card' ELSE 'Cash' END AS BankingTypeDesc, dbo.Banking.Amount, 
+                         dbo.Banking.Number, dbo.Banking.Reconciled, dbo.Banking.Memo, dbo.Employee.FirstName + ' ' + dbo.Employee.Surname AS EmployeeName
+FROM            dbo.Banking INNER JOIN
+                         dbo.Employee ON dbo.Banking.EmployeeRecordId = dbo.Employee.RecordId
+
+
+GO
+
+-------------------------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop View [dbo].[InvoiceView]
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[InvoiceView]
+AS
+SELECT        dbo.Invoice.RecordId, dbo.Invoice.Date, dbo.Invoice.DocumentType, 
+						CASE WHEN dbo.Invoice.DocumentType = 'C' THEN 1 
+							WHEN dbo.Invoice.DocumentType = 'P' THEN 2 
+							ELSE 0 
+							END AS DocumentTypeOrder, 
+						CASE WHEN dbo.Invoice.DocumentType = 'C' THEN 'Credit Note' 
+							WHEN dbo.Invoice.DocumentType = 'P' THEN 'Payment' 
+							WHEN dbo.Invoice.DocumentType = 'B' THEN 'Invoice And Payment' 
+							ELSE 'Invoice' 
+							END AS DocumentTypeDesc, 
+						dbo.Invoice.DocumentNumber, dbo.Invoice.Amount, 
+						CASE WHEN dbo.Invoice.DocumentType = 'I' Or dbo.Invoice.DocumentType = 'B' THEN dbo.Invoice.Amount END AS InvoiceAmount, 
+						CASE WHEN dbo.Invoice.DocumentType = 'C' THEN dbo.Invoice.Amount END AS CreditNoteAmount, 
+						CASE WHEN dbo.Invoice.DocumentType = 'P' Or dbo.Invoice.DocumentType = 'B' THEN dbo.Invoice.Amount END AS PaymentAmount, 
+						dbo.Invoice.PaymentType, 
+						CASE WHEN dbo.Invoice.PaymentType = 0 THEN 'Bank' 
+							WHEN dbo.Invoice.PaymentType = 1 THEN 'Cash' 
+							WHEN dbo.Invoice.PaymentType = 2 THEN 'Card' 
+							ELSE 'Bank' 
+							END AS PaymentTypeDesc, 
+						(Select Sum(CASE WHEN dbo.AdjustmentRequested.DocumentType = 'C' 
+						THEN (0 - Amount) ELSE Amount END) AS AdjustmentAmt
+						From dbo.AdjustmentRequested Where dbo.Invoice.DocumentNumber = dbo.AdjustmentRequested.InvoiceNumber 
+						and dbo.Invoice.DocumentType = 'I') AS AdjustmentAmount, 
+						dbo.Invoice.Memo, dbo.Invoice.SupplierRecordId, dbo.Supplier.Description AS SupplierName, 
+						dbo.Employee.FirstName + ' ' + dbo.Employee.Surname AS EmployeeName
+FROM            dbo.Invoice 
+				INNER JOIN dbo.Employee ON dbo.Invoice.EmployeeRecordId = dbo.Employee.RecordId 
+				INNER JOIN dbo.Supplier ON dbo.Invoice.SupplierRecordId = dbo.Supplier.RecordId
+GO
+
+-------------------------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop View [dbo].[AdjustmentView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE VIEW [dbo].[AdjustmentView]
+AS
+SELECT        dbo.AdjustmentRequested.RecordId, dbo.AdjustmentRequested.Date, dbo.AdjustmentRequested.InvoiceNumber, CASE WHEN AdjustmentRequested.DocumentType = 'C' THEN 'Credit Note' ELSE 'Invoice' END AS DocumentTypeDesc, 
+              dbo.AdjustmentRequested.Reconciled, dbo.AdjustmentRequested.Amount, 
+						CASE WHEN AdjustmentRequested.DocumentType = 'I' THEN dbo.AdjustmentRequested.Amount END AS InvoiceAmount, 
+						CASE WHEN AdjustmentRequested.DocumentType = 'C' THEN dbo.AdjustmentRequested.Amount END AS CreditNoteAmount, 
+			  dbo.AdjustmentRequested.Memo, dbo.Supplier.Description AS SupplierName, dbo.Employee.FirstName + ' ' + dbo.Employee.Surname AS EmployeeName
+FROM            dbo.AdjustmentRequested
+				INNER JOIN dbo.Employee ON dbo.AdjustmentRequested.EmployeeRecordId = dbo.Employee.RecordId 
+				INNER JOIN dbo.Supplier ON dbo.AdjustmentRequested.SupplierRecordId = dbo.Supplier.RecordId
+				
+
+GO
+
+-------------------------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop View [dbo].[AdjustmentTransactionView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[AdjustmentTransactionView]
+AS
+SELECT        dbo.AdjustmentTransaction.RecordId, dbo.AdjustmentTransaction.InventoryDescription, dbo.AdjustmentTransaction.Quantity, dbo.AdjustmentTransaction.CostPrice, 
+              dbo.AdjustmentTransaction.CalcAmount, dbo.AdjustmentTransaction.Memo, dbo.AdjustmentTransaction.AdjustmentRequestedRecordId, dbo.Employee.FirstName + ' ' + dbo.Employee.Surname AS EmployeeName
+FROM            dbo.AdjustmentTransaction
+				INNER JOIN dbo.Employee ON dbo.AdjustmentTransaction.EmployeeRecordId = dbo.Employee.RecordId 
+				
+GO
+
+-------------------------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop View [dbo].[DefaultShiftView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[DefaultShiftView]
+AS
+SELECT        dbo.DefaultShift.RecordId, dbo.DefaultShift.Description, dbo.DefaultShift.StartTime, dbo.DefaultShift.EndTime, dbo.DefaultShift.Hours, 
+                         dbo.Employee.FirstName + ' ' + dbo.Employee.Surname AS EmployeeName
+FROM            dbo.DefaultShift INNER JOIN
+                         dbo.Employee ON dbo.DefaultShift.EmployeeRecordId = dbo.Employee.RecordId
+
+GO
+
+-------------------------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop View [dbo].[DailyShiftHeaderView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[DailyShiftHeaderView]
+AS
+SELECT        dbo.DailyShiftHeader.RecordId, dbo.DailyShiftHeader.Date, dbo.DailyShiftHeader.DayOfWeek, dbo.DailyShiftHeader.Shifts, dbo.DailyShiftHeader.Memo, 
+						CASE WHEN dbo.DailyShiftHeader.DailyRateAdjustment = 0 THEN 'None'
+							 WHEN dbo.DailyShiftHeader.DailyRateAdjustment = 1 THEN 'Time and a Half'
+							 WHEN dbo.DailyShiftHeader.DailyRateAdjustment = 2 THEN 'Double Time'
+						END AS DailyRateAdjustmentDescription, 
+                        dbo.Employee.FirstName + ' ' + dbo.Employee.Surname AS EmployeeName
+FROM            dbo.DailyShiftHeader INNER JOIN
+                         dbo.Employee ON dbo.DailyShiftHeader.EmployeeRecordId = dbo.Employee.RecordId
+
+GO
+
+-------------------------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop View [dbo].[DailyShiftView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[DailyShiftView]
+AS
+SELECT        dbo.DailyShift.RecordId, dbo.DailyShift.DailyShiftHeaderRecordId, dbo.DailyShift.Date, 
+						dbo.DailyShift.StartTime, dbo.DailyShift.EndTime, dbo.DailyShift.Hours, 
+						dbo.DailyShift.DefaultShiftRecordId, 
+						dbo.DefaultShift.Description AS ShiftDescription, 
+						dbo.DailyShift.ThisShiftEmployeeRecordId, 
+                        dbo.Employee.FirstName + ' ' + dbo.Employee.Surname AS ThisShiftEmployee 
+FROM			dbo.DailyShift 
+						LEFT JOIN dbo.DefaultShift ON dbo.DailyShift.DefaultShiftRecordId = dbo.DefaultShift.RecordId  
+						LEFT JOIN dbo.Employee ON dbo.DailyShift.ThisShiftEmployeeRecordId = dbo.Employee.RecordId
+GO
+
+-------------------------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop View [dbo].[SupplierView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE VIEW [dbo].[SupplierView]
+AS
+SELECT        dbo.Supplier.RecordId, dbo.Supplier.Description, dbo.Supplier.Telephone, dbo.Supplier.CellNumber,
+					dbo.Supplier.InactiveSupplier, dbo.Supplier.COS, 
+						CASE WHEN dbo.Supplier.InactiveSupplier = 0 THEN '' 
+							 WHEN dbo.Supplier.InactiveSupplier = 1 THEN 'Inactive' 
+						END AS InactiveSupplierDescription, 
+						CASE WHEN dbo.Supplier.COS = 0 THEN 'Expense' 
+							 WHEN dbo.Supplier.COS = 1 THEN 'COS' 
+						END AS ExpenseType
+FROM            dbo.Supplier 
+
+GO
+
+-------------------------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop View [dbo].[TaskView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[TaskView]
+AS
+SELECT        dbo.Task.RecordId, dbo.Task.GroupNumber, 
+						CASE WHEN dbo.Task.GroupNumber = 0 THEN 'Daily' 
+							 WHEN dbo.Task.GroupNumber = 1 THEN 'Weekly' 
+							 WHEN dbo.Task.GroupNumber = 2 THEN 'Monthly' 
+							 WHEN dbo.Task.GroupNumber = 3 THEN 'Other' 
+						END AS GroupDescription, dbo.Task.Number, dbo.Task.Description, dbo.Task.EmployeeRecordId, 
+						dbo.Employee.FirstName + ' ' + dbo.Employee.Surname AS EmployeeName
+FROM            dbo.Task INNER JOIN
+                         dbo.Employee ON dbo.Task.EmployeeRecordId = dbo.Employee.RecordId
+GO
+
+-------------------------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop View [dbo].[LeaveTakenView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[LeaveTakenView]
+AS
+SELECT        dbo.LeaveTaken.RecordId, dbo.LeaveTaken.StartDate, dbo.LeaveTaken.EndDate, 
+						dbo.LeaveTaken.Days, dbo.LeaveTaken.LeaveType, 
+						dbo.LeaveTaken.LeaveTakenEmployeeRecordId , 
+                        dbo.Employee.FirstName + ' ' + dbo.Employee.Surname AS ThisLeaveTakenEmployee
+FROM            dbo.LeaveTaken LEFT JOIN
+                         dbo.Employee ON dbo.LeaveTaken.LeaveTakenEmployeeRecordId = dbo.Employee.RecordId
+
+GO
+
+-------------------------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop View [dbo].[AssetView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[AssetView]
+AS
+SELECT		dbo.Asset.RecordId, dbo.Asset.BranchCode, dbo.Asset.Description, dbo.Asset.SerialNumber, 
+						dbo.Asset.PurchaseDate, dbo.Asset.Quantity, dbo.Asset.PurchaseAmount, 
+						(dbo.Asset.Quantity * dbo.Asset.PurchaseAmount) as TotalAmount, dbo.Asset.SaleDate, 
+						dbo.Asset.SaleAmount, dbo.Asset.Memo, dbo.Asset.EmployeeRecordId, 
+						dbo.Employee.FirstName + ' ' + dbo.Employee.Surname AS EmployeeName
+FROM		dbo.Asset INNER JOIN
+                        dbo.Employee ON dbo.Asset.EmployeeRecordId = dbo.Employee.RecordId
+GO
+----------------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop View [dbo].[ServicedView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[ServicedView]
+AS
+SELECT        dbo.Serviced.RecordId, dbo.Serviced.Date, dbo.Serviced.Description, dbo.Serviced.Amount, 
+						dbo.Serviced.AssetRecordId, dbo.Serviced.EmployeeRecordId, dbo.Serviced.Memo, 
+						dbo.Employee.FirstName + ' ' + dbo.Employee.Surname AS EmployeeName
+FROM            dbo.Serviced INNER JOIN
+                         dbo.Employee ON dbo.Serviced.EmployeeRecordId = dbo.Employee.RecordId
+GO
+
+--------------------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop View [dbo].[AttachmentView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[AttachmentView]
+AS
+SELECT        dbo.Attachment.RecordId, dbo.Attachment.Date, dbo.Attachment.Description, 
+						dbo.Attachment.FileAndLocation, dbo.Attachment.AssetRecordId, 
+						dbo.Attachment.EmployeeRecordId, 
+						dbo.Employee.FirstName + ' ' + dbo.Employee.Surname AS EmployeeName 
+FROM            dbo.Attachment INNER JOIN 
+                         dbo.Employee ON dbo.Attachment.EmployeeRecordId = dbo.Employee.RecordId
+GO
+
+--------------------------------------------------------------------------------
+USE [CM]
+GO
+
+--Drop View [dbo].[InventoryView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[InventoryView]
+AS
+SELECT		dbo.Inventory.RecordId, dbo.Inventory.Description, dbo.Inventory.CostPrice, 
+				dbo.Inventory.SellingPrice, dbo.Inventory.SupplierId, 
+				dbo.Supplier.Description AS SupplierDescription, 
+				dbo.Inventory.InactiveInventory, 
+				CASE WHEN dbo.Inventory.InactiveInventory = 0 THEN '' 
+					 WHEN dbo.Inventory.InactiveInventory = 1 THEN 'Inactive' 
+				END AS InactiveInventoryDescription
+FROM		dbo.Inventory 
+				INNER JOIN dbo.Supplier ON dbo.Inventory.SupplierId = dbo.Supplier.RecordId
+GO
+
+--------------------------------------------------------------------------------
+
+USE [CM]
+GO
+
+--Drop View [dbo].[DailyEmployeeShiftView]
+--GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[DailyEmployeeShiftView]
+AS
+SELECT        dbo.DailyShift.RecordId, dbo.DailyShift.DailyShiftHeaderRecordId, dbo.DailyShift.Date, 
+				dbo.DailyShift.StartTime, dbo.DailyShift.EndTime, dbo.DailyShift.Hours, 
+				dbo.DailyShift.ThisShiftEmployeeRecordId, dbo.DailyShift.EmployeeRecordId, 
+				dbo.DailyShift.DefaultShiftRecordId, dbo.DailyShift.EmployeeStartTime, 
+				dbo.DailyShift.EmployeeEndTime, dbo.DailyShift.EmployeeHours, 
+				dbo.DailyShift.Memo, dbo.DailyShift.ClockStartTime, dbo.DailyShift.ClockEndTime, 
+				dbo.DefaultShift.Description AS ShiftDescription, 
+				dbo.Employee.FirstName + ' ' + dbo.Employee.Surname AS EmployeeName
+FROM            dbo.DailyShift 
+				LEFT JOIN dbo.DefaultShift ON dbo.DailyShift.DefaultShiftRecordId = dbo.DefaultShift.RecordId  
+				LEFT JOIN dbo.Employee ON dbo.DailyShift.ThisShiftEmployeeRecordId = dbo.Employee.RecordId 
+GO
+

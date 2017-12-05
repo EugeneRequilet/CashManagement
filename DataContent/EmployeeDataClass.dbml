@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CM" Class="EmployeeDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(local)\SQLEXPRESS;Initial Catalog=CM;Integrated Security=True;MultipleActiveResultSets=True" SettingsObjectName="CashManagement.My.MySettings" SettingsPropertyName="CMConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Employee" Member="Employees">
+    <Type Name="Employee">
+      <Column Name="RecordId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(51) NOT NULL" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Code" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Surname" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="IDNumber" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="MaritalStatus" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NoOfDependants" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DateStarted" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Rate" Type="System.Decimal" DbType="Decimal(13,2)" CanBeNull="true" />
+      <Column Name="HomeTelephone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="CellNumber" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="ResdentialAddress1" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ResdentialAddress2" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ResdentialAddress3" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ResdentialCode" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="PostalAddress1" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="PostalAddress2" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="PostalAddress3" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="PostalCode" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="BankName" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="BranchName" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="BranchNumber" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="AccountNumber" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="AccountType" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="InactiveEmployee" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EmployeeType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TaxNumber" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ContactName" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ContactRelationship" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ContactPhone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="YTDLeaveDaysTaken" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="YTDLeaveMemo" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="YTDSickDaysTaken" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="BranchCode" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

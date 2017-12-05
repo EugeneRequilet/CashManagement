@@ -1,0 +1,1629 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C79E21D2-ECD4-4B5E-A380-EAA58EAE6F5C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>CashManagement.My.MyApplication</StartupObject>
+    <RootNamespace>CashManagement</RootNamespace>
+    <AssemblyName>CashManagement</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\VB\publish\CM\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ProductName>Cash Management</ProductName>
+    <PublisherName>GCL Enterprises</PublisherName>
+    <SuiteName>Cash Management</SuiteName>
+    <ApplicationRevision>15</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>CashManagement.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>CashManagement.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>88A0F5CEBB2D416FAA07FFED4977BE2DB5279EC8</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>CashManagement_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>smartmed.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic.Compatibility" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Browse\BrowseAdjustments.Designer.vb">
+      <DependentUpon>BrowseAdjustments.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Browse\BrowseAdjustments.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Browse\BrowseAdjustmentTransaction.Designer.vb">
+      <DependentUpon>BrowseAdjustmentTransaction.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Browse\BrowseAdjustmentTransaction.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Browse\BrowseAsset.Designer.vb">
+      <DependentUpon>BrowseAsset.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Browse\BrowseAsset.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Browse\BrowseAttachment.Designer.vb">
+      <DependentUpon>BrowseAttachment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Browse\BrowseAttachment.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Browse\BrowseBranch.Designer.vb">
+      <DependentUpon>BrowseBranch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Browse\BrowseBranch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Browse\BrowseDailyEmployeeShift.Designer.vb">
+      <DependentUpon>BrowseDailyEmployeeShift.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Browse\BrowseDailyEmployeeShift.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Browse\BrowseDailyShift.Designer.vb">
+      <DependentUpon>BrowseDailyShift.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Browse\BrowseDailyShift.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Browse\BrowseDailyShiftHeader.Designer.vb">
+      <DependentUpon>BrowseDailyShiftHeader.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Browse\BrowseDailyShiftHeader.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Browse\BrowseDebtorInvoices.Designer.vb">
+      <DependentUpon>BrowseDebtorInvoices.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Browse\BrowseDebtorInvoices.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Browse\BrowseDefaultShift.Designer.vb">
+      <DependentUpon>BrowseDefaultShift.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Browse\BrowseDefaultShift.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Browse\BrowseEmployee.Designer.vb">
+      <DependentUpon>BrowseEmployee.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Browse\BrowseEmployee.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Browse\BrowseInventory.Designer.vb">
+      <DependentUpon>BrowseInventory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Browse\BrowseInventory.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Browse\BrowseInvoice.Designer.vb">
+      <DependentUpon>BrowseInvoice.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Browse\BrowseInvoice.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Browse\BrowseLeaveTaken.Designer.vb">
+      <DependentUpon>BrowseLeaveTaken.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Browse\BrowseLeaveTaken.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Browse\BrowseRecon.Designer.vb">
+      <DependentUpon>BrowseRecon.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Browse\BrowseRecon.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Browse\BrowseSales.Designer.vb">
+      <DependentUpon>BrowseSales.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Browse\BrowseSales.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Browse\BrowseCashUp.Designer.vb">
+      <DependentUpon>BrowseCashUp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Browse\BrowseCashUp.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Browse\BrowseBanking.Designer.vb">
+      <DependentUpon>BrowseBanking.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Browse\BrowseBanking.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Browse\BrowseServiced.Designer.vb">
+      <DependentUpon>BrowseServiced.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Browse\BrowseServiced.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Browse\BrowseSupplier.Designer.vb">
+      <DependentUpon>BrowseSupplier.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Browse\BrowseSupplier.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Browse\BrowseTask.Designer.vb">
+      <DependentUpon>BrowseTask.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Browse\BrowseTask.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\AmountTextBox.Designer.vb">
+      <DependentUpon>AmountTextBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AmountTextBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DataContent\AdjustmentDataClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdjustmentDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\AdjustmentDataClass.vb">
+      <DependentUpon>AdjustmentDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\AdjustmentTransactionDataClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdjustmentTransactionDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\AdjustmentTransactionViewDataClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdjustmentTransactionViewDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\AdjustmentTransactionViewDataClass.vb">
+      <DependentUpon>AdjustmentTransactionViewDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\AdjustmentViewDataClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdjustmentViewDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\AssetDataClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssetDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\AssetView.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssetView.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\AttachmentDataClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AttachmentDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\AttachmentViewDataClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AttachmentViewDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\BankingClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BankingClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\BankingViewClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BankingViewClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\BranchDataClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BranchDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\BranchView.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BranchView.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\CashUpDataClass.vb">
+      <DependentUpon>CashUpDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\CashupReconView.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CashupReconView.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\CashUpView.vb">
+      <DependentUpon>CashUpView.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\DailyEmployeeShiftView.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailyEmployeeShiftView.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\DailyShiftDataClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailyShiftDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\DailyShiftHeaderDataClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailyShiftHeaderDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\DailyShiftHeaderView.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailyShiftHeaderView.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\DailyShiftView.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailyShiftView.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\DefaultShiftDataClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DefaultShiftDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\DefaultShiftView.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DefaultShiftView.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\EmployeeView.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeView.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\InventoryDataClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InventoryDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\InventoryView.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InventoryView.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\InvoiceDataClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\InvoiceView.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceView.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\LeaveTakenDataClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LeaveTakenDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\LeaveTakenView.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LeaveTakenView.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\SalesDataClass.vb">
+      <DependentUpon>SalesDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\ServicedDataClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServicedDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\ServicedView.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServicedView.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\SupplierDataClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SupplierDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\SupplierView.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SupplierView.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\TaskDataClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TaskDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\TaskView.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TaskView.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\AdjustmentGrid.Designer.vb">
+      <DependentUpon>AdjustmentGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\AdjustmentGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\AdjustmentTransactionGrid.Designer.vb">
+      <DependentUpon>AdjustmentTransactionGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\AdjustmentTransactionGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\AssetGrid.Designer.vb">
+      <DependentUpon>AssetGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\AssetGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\AttachmentGrid.Designer.vb">
+      <DependentUpon>AttachmentGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\AttachmentGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\BankingGrid.Designer.vb">
+      <DependentUpon>BankingGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\BankingGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\BranchGrid.Designer.vb">
+      <DependentUpon>BranchGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\BranchGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\CashUpReconGrid.Designer.vb">
+      <DependentUpon>CashUpReconGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\CashUpReconGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\BankingReconGrid.Designer.vb">
+      <DependentUpon>BankingReconGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\BankingReconGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\DailyEmployeeShiftGrid.Designer.vb">
+      <DependentUpon>DailyEmployeeShiftGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\DailyEmployeeShiftGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\DailyShiftGrid.Designer.vb">
+      <DependentUpon>DailyShiftGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\DailyShiftGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\DailyShiftHeaderGrid.Designer.vb">
+      <DependentUpon>DailyShiftHeaderGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\DailyShiftHeaderGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\DebtorGrid.Designer.vb">
+      <DependentUpon>DebtorGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\DebtorGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\DefaultShiftGrid.Designer.vb">
+      <DependentUpon>DefaultShiftGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\DefaultShiftGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\InventoryGrid.Designer.vb">
+      <DependentUpon>InventoryGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\InventoryGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\LeaveTakenGrid.Designer.vb">
+      <DependentUpon>LeaveTakenGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\LeaveTakenGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\ServicedGrid.Designer.vb">
+      <DependentUpon>ServicedGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\ServicedGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\SupplierGrid.Designer.vb">
+      <DependentUpon>SupplierGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\SupplierGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\InvoiceGrid.Designer.vb">
+      <DependentUpon>InvoiceGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\InvoiceGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\TaskGrid.Designer.vb">
+      <DependentUpon>TaskGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\TaskGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Other Forms\BackupRestoreDatabaseForm.Designer.vb">
+      <DependentUpon>BackupRestoreDatabaseForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\BackupRestoreDatabaseForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other Forms\CashupControlSheet.Designer.vb">
+      <DependentUpon>CashupControlSheet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\CashupControlSheet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other Forms\ComparitiveCashupControlSheet.Designer.vb">
+      <DependentUpon>ComparitiveCashupControlSheet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\ComparitiveCashupControlSheet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other Forms\MonthlyDataSheet.Designer.vb">
+      <DependentUpon>MonthlyDataSheet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\MonthlyDataSheet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other Forms\OperationCheckForm.Designer.vb">
+      <DependentUpon>OperationCheckForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\OperationCheckForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other Forms\PrintBankingForm.Designer.vb">
+      <DependentUpon>PrintBankingForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\PrintBankingForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other Forms\PrintCashierVarianceForm.Designer.vb">
+      <DependentUpon>PrintCashierVarianceForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\PrintCashierVarianceForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other Forms\PrintDailyCashupForm.Designer.vb">
+      <DependentUpon>PrintDailyCashupForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\PrintDailyCashupForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other Forms\PrintDailyEmployeeShiftForm.Designer.vb">
+      <DependentUpon>PrintDailyEmployeeShiftForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\PrintDailyEmployeeShiftForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other Forms\PrintDailyShiftForm.Designer.vb">
+      <DependentUpon>PrintDailyShiftForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\PrintDailyShiftForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other Forms\PrintIETrans.Designer.vb">
+      <DependentUpon>PrintIETrans.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\PrintIETrans.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other Forms\PrintMonthlyIncomeExpenditure.Designer.vb">
+      <DependentUpon>PrintMonthlyIncomeExpenditure.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\PrintMonthlyIncomeExpenditure.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other Forms\PrintPayoutForm.Designer.vb">
+      <DependentUpon>PrintPayoutForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\PrintPayoutForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other Forms\PrintSalesForm.Designer.vb">
+      <DependentUpon>PrintSalesForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\PrintSalesForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other Forms\SelectDateForm.Designer.vb">
+      <DependentUpon>SelectDateForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\SelectDateForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other Forms\SelectDateFromToForm.Designer.vb">
+      <DependentUpon>SelectDateFromToForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\SelectDateFromToForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other Forms\TurnoverDeclarationForm.Designer.vb">
+      <DependentUpon>TurnoverDeclarationForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\TurnoverDeclarationForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other Forms\UploadBankingCSV.Designer.vb">
+      <DependentUpon>UploadBankingCSV.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\UploadBankingCSV.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other Forms\UploadInventoryCSVForm.Designer.vb">
+      <DependentUpon>UploadInventoryCSVForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\UploadInventoryCSVForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other Forms\UploadSalesCSVForm.Designer.vb">
+      <DependentUpon>UploadSalesCSVForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\UploadSalesCSVForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other Forms\UploadTaskCSVForm.Designer.vb">
+      <DependentUpon>UploadTaskCSVForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\UploadTaskCSVForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\CashierFloatCountForm.Designer.vb">
+      <DependentUpon>CashierFloatCountForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\CashierFloatCountForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateAdjustmentForm.Designer.vb">
+      <DependentUpon>UpdateAdjustmentForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateAdjustmentForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateAdjustmentTransactionForm.Designer.vb">
+      <DependentUpon>UpdateAdjustmentTransactionForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateAdjustmentTransactionForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateAssetForm.Designer.vb">
+      <DependentUpon>UpdateAssetForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateAssetForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateAttachmentForm.Designer.vb">
+      <DependentUpon>UpdateAttachmentForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateAttachmentForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateBankingForm.Designer.vb">
+      <DependentUpon>UpdateBankingForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateBankingForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateBankingReconForm.Designer.vb">
+      <DependentUpon>UpdateBankingReconForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateBankingReconForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\DailyReconciliationForm.Designer.vb">
+      <DependentUpon>DailyReconciliationForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\DailyReconciliationForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataContent\CashUpDataClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CashUpDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\CashUpView.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CashUpView.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\SalesView.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SalesView.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\CashUpGrid.Designer.vb">
+      <DependentUpon>CashUpGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\CashUpGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\SalesGrid.Designer.vb">
+      <DependentUpon>SalesGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\SalesGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DataContent\EmployeeDataClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\FirmDetailsDataClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FirmDetailsDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContent\SalesDataClass.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SalesDataClass.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\EmployeeGrid.Designer.vb">
+      <DependentUpon>EmployeeGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\EmployeeGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Other Forms\PrintCashupForm.Designer.vb">
+      <DependentUpon>PrintCashupForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\PrintCashupForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateBranchForm.Designer.vb">
+      <DependentUpon>UpdateBranchForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateBranchForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateCashUpForm.Designer.vb">
+      <DependentUpon>UpdateCashUpForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateCashUpForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateCashUpReconForm.Designer.vb">
+      <DependentUpon>UpdateCashUpReconForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateCashUpReconForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateDailyEmployeeShiftForm.Designer.vb">
+      <DependentUpon>UpdateDailyEmployeeShiftForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateDailyEmployeeShiftForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateDailyShiftForm.Designer.vb">
+      <DependentUpon>UpdateDailyShiftForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateDailyShiftForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateDailyShiftHeaderForm.Designer.vb">
+      <DependentUpon>UpdateDailyShiftHeaderForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateDailyShiftHeaderForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateDebtorTransForm.Designer.vb">
+      <DependentUpon>UpdateDebtorTransForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateDebtorTransForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateDefaultShiftForm.Designer.vb">
+      <DependentUpon>UpdateDefaultShiftForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateDefaultShiftForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateInventoryForm.Designer.vb">
+      <DependentUpon>UpdateInventoryForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateInventoryForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateInvoiceForm.Designer.vb">
+      <DependentUpon>UpdateInvoiceForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateInvoiceForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateLeaveTakenForm.Designer.vb">
+      <DependentUpon>UpdateLeaveTakenForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateLeaveTakenForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateSalesForm.Designer.vb">
+      <DependentUpon>UpdateSalesForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateSalesForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\LoginForm.Designer.vb">
+      <DependentUpon>LoginForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\LoginForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.vb">
+      <DependentUpon>Main.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\ModuleFunctions.vb" />
+    <Compile Include="Modules\ModuleProperties.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateEmployeeForm.Designer.vb">
+      <DependentUpon>UpdateEmployeeForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateEmployeeForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateFirmDetailsForm.Designer.vb">
+      <DependentUpon>UpdateFirmDetailsForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateFirmDetailsForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateServicedForm.Designer.vb">
+      <DependentUpon>UpdateServicedForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateServicedForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateSupplierForm.Designer.vb">
+      <DependentUpon>UpdateSupplierForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateSupplierForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateTaskForm.Designer.vb">
+      <DependentUpon>UpdateTaskForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForms\UpdateTaskForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Browse\BrowseAsset.resx">
+      <DependentUpon>BrowseAsset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Browse\BrowseAttachment.resx">
+      <DependentUpon>BrowseAttachment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Browse\BrowseBranch.resx">
+      <DependentUpon>BrowseBranch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Browse\BrowseDailyEmployeeShift.resx">
+      <DependentUpon>BrowseDailyEmployeeShift.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Browse\BrowseDebtorInvoices.resx">
+      <DependentUpon>BrowseDebtorInvoices.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Browse\BrowseLeaveTaken.resx">
+      <DependentUpon>BrowseLeaveTaken.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Browse\BrowseServiced.resx">
+      <DependentUpon>BrowseServiced.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Browse\BrowseTask.resx">
+      <DependentUpon>BrowseTask.vb</DependentUpon>
+    </EmbeddedResource>
+    <None Include="DataContent\AssetDataClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>AssetDataClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\AssetView.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>AssetView.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\AttachmentDataClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>AttachmentDataClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\AttachmentViewDataClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>AttachmentViewDataClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\BranchDataClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>BranchDataClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\BranchView.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>BranchView.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\DailyEmployeeShiftView.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DailyEmployeeShiftView.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\InventoryView.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>InventoryView.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\LeaveTakenDataClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>LeaveTakenDataClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\LeaveTakenView.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>LeaveTakenView.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\ServicedDataClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>ServicedDataClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\ServicedView.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>ServicedView.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\SupplierView.dbml.layout">
+      <DependentUpon>SupplierView.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\LeaveTakenDataClass.dbml.layout">
+      <DependentUpon>LeaveTakenDataClass.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\LeaveTakenView.dbml.layout">
+      <DependentUpon>LeaveTakenView.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\AssetDataClass.dbml.layout">
+      <DependentUpon>AssetDataClass.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\ServicedDataClass.dbml.layout">
+      <DependentUpon>ServicedDataClass.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\AssetView.dbml.layout">
+      <DependentUpon>AssetView.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\ServicedView.dbml.layout">
+      <DependentUpon>ServicedView.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\InventoryView.dbml.layout">
+      <DependentUpon>InventoryView.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\DailyEmployeeShiftView.dbml.layout">
+      <DependentUpon>DailyEmployeeShiftView.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\AttachmentDataClass.dbml.layout">
+      <DependentUpon>AttachmentDataClass.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\AttachmentViewDataClass.dbml.layout">
+      <DependentUpon>AttachmentViewDataClass.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\BranchDataClass.dbml.layout">
+      <DependentUpon>BranchDataClass.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\BranchView.dbml.layout">
+      <DependentUpon>BranchView.dbml</DependentUpon>
+    </None>
+    <EmbeddedResource Include="Grids\AssetGrid.resx">
+      <DependentUpon>AssetGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\AttachmentGrid.resx">
+      <DependentUpon>AttachmentGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\BranchGrid.resx">
+      <DependentUpon>BranchGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\DailyEmployeeShiftGrid.resx">
+      <DependentUpon>DailyEmployeeShiftGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\DebtorGrid.resx">
+      <DependentUpon>DebtorGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\LeaveTakenGrid.resx">
+      <DependentUpon>LeaveTakenGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\ServicedGrid.resx">
+      <DependentUpon>ServicedGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\ComparitiveCashupControlSheet.resx">
+      <DependentUpon>ComparitiveCashupControlSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\MonthlyDataSheet.resx">
+      <DependentUpon>MonthlyDataSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\PrintDailyEmployeeShiftForm.resx">
+      <DependentUpon>PrintDailyEmployeeShiftForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\PrintIETrans.resx">
+      <DependentUpon>PrintIETrans.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\PrintMonthlyIncomeExpenditure.resx">
+      <DependentUpon>PrintMonthlyIncomeExpenditure.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\UploadSalesCSVForm.resx">
+      <DependentUpon>UploadSalesCSVForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\UploadTaskCSVForm.resx">
+      <DependentUpon>UploadTaskCSVForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateAssetForm.resx">
+      <DependentUpon>UpdateAssetForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateAttachmentForm.resx">
+      <DependentUpon>UpdateAttachmentForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateBranchForm.resx">
+      <DependentUpon>UpdateBranchForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateDailyEmployeeShiftForm.resx">
+      <DependentUpon>UpdateDailyEmployeeShiftForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateDebtorTransForm.resx">
+      <DependentUpon>UpdateDebtorTransForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateLeaveTakenForm.resx">
+      <DependentUpon>UpdateLeaveTakenForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateServicedForm.resx">
+      <DependentUpon>UpdateServicedForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateTaskForm.resx">
+      <DependentUpon>UpdateTaskForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <None Include="DataContent\AdjustmentDataClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>AdjustmentDataClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\AdjustmentTransactionDataClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>AdjustmentTransactionDataClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\AdjustmentTransactionViewDataClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>AdjustmentTransactionViewDataClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\AdjustmentViewDataClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>AdjustmentViewDataClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\DailyShiftDataClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DailyShiftDataClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\DailyShiftHeaderDataClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DailyShiftHeaderDataClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\DailyShiftHeaderView.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DailyShiftHeaderView.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\DailyShiftView.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DailyShiftView.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\DefaultShiftDataClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DefaultShiftDataClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\DefaultShiftView.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DefaultShiftView.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\EmployeeView.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>EmployeeView.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\InventoryDataClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>InventoryDataClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\SupplierDataClass.dbml.layout">
+      <DependentUpon>SupplierDataClass.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\InventoryDataClass.dbml.layout">
+      <DependentUpon>InventoryDataClass.dbml</DependentUpon>
+    </None>
+    <EmbeddedResource Include="Browse\BrowseAdjustments.resx">
+      <DependentUpon>BrowseAdjustments.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Browse\BrowseAdjustmentTransaction.resx">
+      <DependentUpon>BrowseAdjustmentTransaction.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Browse\BrowseDailyShift.resx">
+      <DependentUpon>BrowseDailyShift.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Browse\BrowseDailyShiftHeader.resx">
+      <DependentUpon>BrowseDailyShiftHeader.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Browse\BrowseDefaultShift.resx">
+      <DependentUpon>BrowseDefaultShift.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Browse\BrowseInventory.resx">
+      <DependentUpon>BrowseInventory.vb</DependentUpon>
+    </EmbeddedResource>
+    <None Include="DataContent\AdjustmentDataClass.dbml.layout">
+      <DependentUpon>AdjustmentDataClass.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\AdjustmentViewDataClass.dbml.layout">
+      <DependentUpon>AdjustmentViewDataClass.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\AdjustmentTransactionDataClass.dbml.layout">
+      <DependentUpon>AdjustmentTransactionDataClass.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\AdjustmentTransactionViewDataClass.dbml.layout">
+      <DependentUpon>AdjustmentTransactionViewDataClass.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\DefaultShiftDataClass.dbml.layout">
+      <DependentUpon>DefaultShiftDataClass.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\DailyShiftHeaderDataClass.dbml.layout">
+      <DependentUpon>DailyShiftHeaderDataClass.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\DailyShiftDataClass.dbml.layout">
+      <DependentUpon>DailyShiftDataClass.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\DefaultShiftView.dbml.layout">
+      <DependentUpon>DefaultShiftView.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\DailyShiftHeaderView.dbml.layout">
+      <DependentUpon>DailyShiftHeaderView.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\DailyShiftView.dbml.layout">
+      <DependentUpon>DailyShiftView.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\EmployeeView.dbml.layout">
+      <DependentUpon>EmployeeView.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\SupplierView.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>SupplierView.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\TaskDataClass.dbml.layout">
+      <DependentUpon>TaskDataClass.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\TaskView.dbml.layout">
+      <DependentUpon>TaskView.dbml</DependentUpon>
+    </None>
+    <EmbeddedResource Include="Grids\AdjustmentGrid.resx">
+      <DependentUpon>AdjustmentGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\AdjustmentTransactionGrid.resx">
+      <DependentUpon>AdjustmentTransactionGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\DailyShiftGrid.resx">
+      <DependentUpon>DailyShiftGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\DailyShiftHeaderGrid.resx">
+      <DependentUpon>DailyShiftHeaderGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\DefaultShiftGrid.resx">
+      <DependentUpon>DefaultShiftGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\InventoryGrid.resx">
+      <DependentUpon>InventoryGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\SupplierGrid.resx">
+      <DependentUpon>SupplierGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\TaskGrid.resx">
+      <DependentUpon>TaskGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\BackupRestoreDatabaseForm.resx">
+      <DependentUpon>BackupRestoreDatabaseForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\OperationCheckForm.resx">
+      <DependentUpon>OperationCheckForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\PrintBankingForm.resx">
+      <DependentUpon>PrintBankingForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\PrintCashierVarianceForm.resx">
+      <DependentUpon>PrintCashierVarianceForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\PrintDailyCashupForm.resx">
+      <DependentUpon>PrintDailyCashupForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\PrintDailyShiftForm.resx">
+      <DependentUpon>PrintDailyShiftForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\PrintPayoutForm.resx">
+      <DependentUpon>PrintPayoutForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\PrintSalesForm.resx">
+      <DependentUpon>PrintSalesForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\SelectDateForm.resx">
+      <DependentUpon>SelectDateForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\SelectDateFromToForm.resx">
+      <DependentUpon>SelectDateFromToForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\TurnoverDeclarationForm.resx">
+      <DependentUpon>TurnoverDeclarationForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\UploadInventoryCSVForm.resx">
+      <DependentUpon>UploadInventoryCSVForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateAdjustmentForm.resx">
+      <DependentUpon>UpdateAdjustmentForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateAdjustmentTransactionForm.resx">
+      <DependentUpon>UpdateAdjustmentTransactionForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateDailyShiftForm.resx">
+      <DependentUpon>UpdateDailyShiftForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateDailyShiftHeaderForm.resx">
+      <DependentUpon>UpdateDailyShiftHeaderForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateDefaultShiftForm.resx">
+      <DependentUpon>UpdateDefaultShiftForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateInventoryForm.resx">
+      <DependentUpon>UpdateInventoryForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateSupplierForm.resx">
+      <DependentUpon>UpdateSupplierForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <None Include="CashManagement_TemporaryKey.pfx" />
+    <None Include="DataContent\BankingClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>BankingClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\BankingViewClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>BankingViewClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\CashUpDataClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>CashUpDataClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\CashupReconView.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>CashupReconView.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\CashUpView.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>CashUpView.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\EmployeeDataClass.dbml.layout">
+      <DependentUpon>EmployeeDataClass.dbml</DependentUpon>
+    </None>
+    <EmbeddedResource Include="Browse\BrowseEmployee.resx">
+      <DependentUpon>BrowseEmployee.vb</DependentUpon>
+    </EmbeddedResource>
+    <None Include="DataContent\InvoiceDataClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>InvoiceDataClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\InvoiceView.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>InvoiceView.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\SalesDataClass.dbml.layout">
+      <DependentUpon>SalesDataClass.dbml</DependentUpon>
+    </None>
+    <EmbeddedResource Include="Browse\BrowseInvoice.resx">
+      <DependentUpon>BrowseInvoice.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Browse\BrowseRecon.resx">
+      <DependentUpon>BrowseRecon.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Browse\BrowseSales.resx">
+      <DependentUpon>BrowseSales.vb</DependentUpon>
+    </EmbeddedResource>
+    <None Include="DataContent\SalesView.dbml.layout">
+      <DependentUpon>SalesView.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\CashUpView.dbml.layout">
+      <DependentUpon>CashUpView.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\CashUpDataClass.dbml.layout">
+      <DependentUpon>CashUpDataClass.dbml</DependentUpon>
+    </None>
+    <EmbeddedResource Include="Browse\BrowseCashUp.resx">
+      <DependentUpon>BrowseCashUp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Browse\BrowseBanking.resx">
+      <DependentUpon>BrowseBanking.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Browse\BrowseSupplier.resx">
+      <DependentUpon>BrowseSupplier.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AmountTextBox.resx">
+      <DependentUpon>AmountTextBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <None Include="DataContent\CashupReconView.dbml.layout">
+      <DependentUpon>CashupReconView.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\BankingClass.dbml.layout">
+      <DependentUpon>BankingClass.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\InvoiceDataClass.dbml.layout">
+      <DependentUpon>InvoiceDataClass.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\BankingViewClass.dbml.layout">
+      <DependentUpon>BankingViewClass.dbml</DependentUpon>
+    </None>
+    <None Include="DataContent\InvoiceView.dbml.layout">
+      <DependentUpon>InvoiceView.dbml</DependentUpon>
+    </None>
+    <EmbeddedResource Include="Grids\BankingGrid.resx">
+      <DependentUpon>BankingGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\CashUpReconGrid.resx">
+      <DependentUpon>CashUpReconGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\BankingReconGrid.resx">
+      <DependentUpon>BankingReconGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\InvoiceGrid.resx">
+      <DependentUpon>InvoiceGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\CashupControlSheet.resx">
+      <DependentUpon>CashupControlSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\UploadBankingCSV.resx">
+      <DependentUpon>UploadBankingCSV.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\CashierFloatCountForm.resx">
+      <DependentUpon>CashierFloatCountForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateBankingForm.resx">
+      <DependentUpon>UpdateBankingForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateBankingReconForm.resx">
+      <DependentUpon>UpdateBankingReconForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\DailyReconciliationForm.resx">
+      <DependentUpon>DailyReconciliationForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\CashUpGrid.resx">
+      <DependentUpon>CashUpGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\SalesGrid.resx">
+      <DependentUpon>SalesGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\EmployeeGrid.resx">
+      <DependentUpon>EmployeeGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\PrintCashupForm.resx">
+      <DependentUpon>PrintCashupForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateCashUpForm.resx">
+      <DependentUpon>UpdateCashUpForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateCashUpReconForm.resx">
+      <DependentUpon>UpdateCashUpReconForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateInvoiceForm.resx">
+      <DependentUpon>UpdateInvoiceForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateSalesForm.resx">
+      <DependentUpon>UpdateSalesForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\LoginForm.resx">
+      <DependentUpon>LoginForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateEmployeeForm.resx">
+      <DependentUpon>UpdateEmployeeForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForms\UpdateFirmDetailsForm.resx">
+      <DependentUpon>UpdateFirmDetailsForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <None Include="DataContent\EmployeeDataClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>EmployeeDataClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\FirmDetailsDataClass.dbml.layout">
+      <DependentUpon>FirmDetailsDataClass.dbml</DependentUpon>
+    </None>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataContent\FirmDetailsDataClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>FirmDetailsDataClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\SalesDataClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>SalesDataClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\SalesView.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>SalesView.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\SupplierDataClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>SupplierDataClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\TaskDataClass.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>TaskDataClass.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataContent\TaskView.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>TaskView.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\DataSources\AdjustmentRequested.datasource" />
+    <None Include="My Project\DataSources\AdjustmentTransaction.datasource" />
+    <None Include="My Project\DataSources\AdjustmentTransactionView.datasource" />
+    <None Include="My Project\DataSources\AdjustmentView.datasource" />
+    <None Include="My Project\DataSources\Asset.datasource" />
+    <None Include="My Project\DataSources\AssetView.datasource" />
+    <None Include="My Project\DataSources\Attachment.datasource" />
+    <None Include="My Project\DataSources\AttachmentView.datasource" />
+    <None Include="My Project\DataSources\Banking.datasource" />
+    <None Include="My Project\DataSources\BankingView.datasource" />
+    <None Include="My Project\DataSources\Branch.datasource" />
+    <None Include="My Project\DataSources\BranchView.datasource" />
+    <None Include="My Project\DataSources\BrowseSales.datasource" />
+    <None Include="My Project\DataSources\CashManagement.My.MyApplication.datasource" />
+    <None Include="My Project\DataSources\CashManagement.My.MySettings.datasource" />
+    <None Include="My Project\DataSources\CashUp.datasource" />
+    <None Include="My Project\DataSources\CashupReconView.datasource" />
+    <None Include="My Project\DataSources\CashupView.datasource" />
+    <None Include="My Project\DataSources\DailyEmployeeShiftView.datasource" />
+    <None Include="My Project\DataSources\DailyShift.datasource" />
+    <None Include="My Project\DataSources\DailyShiftHeader.datasource" />
+    <None Include="My Project\DataSources\DailyShiftHeaderView.datasource" />
+    <None Include="My Project\DataSources\DailyShiftView.datasource" />
+    <None Include="My Project\DataSources\DefaultShift.datasource" />
+    <None Include="My Project\DataSources\DefaultShiftView.datasource" />
+    <None Include="My Project\DataSources\Employee.datasource" />
+    <None Include="My Project\DataSources\EmployeeShift.datasource" />
+    <None Include="My Project\DataSources\EmployeeShiftView.datasource" />
+    <None Include="My Project\DataSources\EmployeeView.datasource" />
+    <None Include="My Project\DataSources\FirmDetail.datasource" />
+    <None Include="My Project\DataSources\Inventory.datasource" />
+    <None Include="My Project\DataSources\InventoryView.datasource" />
+    <None Include="My Project\DataSources\Invoice.datasource" />
+    <None Include="My Project\DataSources\InvoiceView.datasource" />
+    <None Include="My Project\DataSources\LeaveTaken.datasource" />
+    <None Include="My Project\DataSources\LeaveTakenView.datasource" />
+    <None Include="My Project\DataSources\SalesView.datasource" />
+    <None Include="My Project\DataSources\Serviced.datasource" />
+    <None Include="My Project\DataSources\ServicedView.datasource" />
+    <None Include="My Project\DataSources\Shift.datasource" />
+    <None Include="My Project\DataSources\Supplier.datasource" />
+    <None Include="My Project\DataSources\SupplierView.datasource" />
+    <None Include="My Project\DataSources\Task.datasource" />
+    <None Include="My Project\DataSources\TaskView.datasource" />
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>5</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="smartmed.ico" />
+    <Content Include="SQLScripts\SQLStructure.txt" />
+    <Content Include="SQLScripts\SQLUpdateScripts.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

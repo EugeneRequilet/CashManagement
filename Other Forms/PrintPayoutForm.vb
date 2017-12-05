@@ -1,0 +1,447 @@
+﻿Imports Excel = Microsoft.Office.Interop.Excel
+Imports System.IO
+
+Public Class PrintPayoutForm
+
+    Dim xlApp As New Excel.Application
+    Dim xlWorkBook As Excel.Workbook
+    Dim xlWorkSheet As Excel.Worksheet
+
+    Dim XLDirectory As String = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\"
+    Dim XLFileName As String = "Payout " & Today.ToString("yyyy-MM")
+    Dim XLExtention As String = ".xlsx"
+
+    Dim CUDC As CashUpDataContext
+    Dim CashupRow As CashUp
+    Dim EDC As EmployeeDataContext
+    Dim EmployeeRow As Employee
+
+    Dim SpreadsheetLine As Integer
+    Dim LineNoString As String
+    Dim CellString As String
+    Dim FormulaString As String
+
+    Dim Column1IsZero As Byte
+    Dim Column2IsZero As Byte
+    Dim Column3IsZero As Byte
+    Dim Column4IsZero As Byte
+    Dim Column5IsZero As Byte
+    Dim Column6IsZero As Byte
+
+    Private Sub PrintInvoices_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        setDropdowns()
+        If GlobalFirmDetailRow.GeneralDefaultDirectory <> "" Then
+            XLDirectory = GlobalFirmDetailRow.GeneralDefaultDirectory
+        End If
+        If Directory.Exists(XLDirectory) = False Then
+            MessageBox.Show("Invalid Folder set in the Firm Details Control:" & vbCrLf & XLDirectory & vbCrLf & vbCrLf & "Changing the Default folder to MyDocuments.", "Reporting Error")
+            XLDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\"
+        End If
+    End Sub
+
+    Private Sub setDropdowns()
+        cboDateRange.Items.Clear()
+        cboDateRange.Items.Add("As Is")
+        cboDateRange.Items.Add(Format(DateSerial(Year(Today), Month(Today), 1), "MMMM yyyy"))
+        cboDateRange.Items.Add(Format(DateSerial(Year(Today), (Month(Today) - 1), 1), "MMMM yyyy"))
+        cboDateRange.Items.Add(Format(DateSerial(Year(Today), (Month(Today) - 2), 1), "MMMM yyyy"))
+        cboDateRange.Items.Add(Format(DateSerial(Year(Today), (Month(Today) - 3), 1), "MMMM yyyy"))
+        cboDateRange.Items.Add(Format(DateSerial(Year(Today), (Month(Today) - 4), 1), "MMMM yyyy"))
+        cboDateRange.Items.Add(Format(DateSerial(Year(Today), (Month(Today) - 5), 1), "MMMM yyyy"))
+        cboDateRange.SelectedIndex = 0
+        setDatesFromDropdown()
+    End Sub
+
+    Private Sub setDatesFromDropdown()
+        Select Case cboDateRange.SelectedIndex
+            Case 0
+                txtDateFrom.Text = (GlobalDateFrom).ToString
+                txtDateTo.Text = (GlobalDateTo).ToString
+            Case 1
+                txtDateFrom.Text = (DateSerial(Year(Today), Month(Today), 1)).ToString
+                txtDateTo.Text = (DateSerial(Year(Today), Month(Today) + 1, 0)).ToString
+            Case 2
+                txtDateFrom.Text = (DateSerial(Year(Today), (Month(Today) - 1), 1)).ToString
+                txtDateTo.Text = (DateSerial(Year(Today), Month(Today), 0)).ToString
+            Case 3
+                txtDateFrom.Text = (DateSerial(Year(Today), (Month(Today) - 2), 1)).ToString
+                txtDateTo.Text = (DateSerial(Year(Today), (Month(Today) - 1), 0)).ToString
+            Case 4
+                txtDateFrom.Text = (DateSerial(Year(Today), (Month(Today) - 3), 1)).ToString
+                txtDateTo.Text = (DateSerial(Year(Today), (Month(Today) - 2), 0)).ToString
+            Case 5
+                txtDateFrom.Text = (DateSerial(Year(Today), (Month(Today) - 4), 1)).ToString
+                txtDateTo.Text = (DateSerial(Year(Today), (Month(Today) - 3), 0)).ToString
+            Case 6
+                txtDateFrom.Text = (DateSerial(Year(Today), (Month(Today) - 5), 1)).ToString
+                txtDateTo.Text = (DateSerial(Year(Today), (Month(Today) - 4), 0)).ToString
+        End Select
+    End Sub
+
+    Private Sub cboDateRange_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDateRange.SelectedIndexChanged
+        setDatesFromDropdown()
+    End Sub
+
+    Private Sub ExportExcelButton_Click(sender As Object, e As EventArgs) Handles ExcelButton.Click
+        ProcessSpreadSheet()
+    End Sub
+
+    Private Sub OpenExcelButton_Click(sender As Object, e As EventArgs) Handles OpenExcelButton.Click
+        XLFileName = GetFileName(4, 0)
+        If XLFileName Is Nothing Or XLFileName = "" Then Exit Sub
+        OpenExcelSpreadsheet()
+    End Sub
+
+    Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
+        Me.Close()
+    End Sub
+
+    Private Sub ProcessSpreadSheet()
+        Dim SQLString As String
+        SQLString = "Select * From Cashup Where Date >= '" &
+            DateTime.Parse(txtDateFrom.Text).ToString("dd MMM yyyy") & "' and Date <= '" &
+            DateTime.Parse(txtDateTo.Text).ToString("dd MMM yyyy") &
+            "' And SalesType = 0 Order by Date"
+        Try
+            Dim SQL = SQLString
+            CUDC = New CashUpDataContext
+            CashupBindingSource.DataSource = CUDC.ExecuteQuery(Of CashUp)(SQL)
+        Catch ex As Exception
+            MessageBox.Show("Invoice Exception Error: " & vbCrLf & ex.Message, "Reporting Error")
+            Exit Sub
+        End Try
+
+        XLFileName = "Payout " & Format(txtDateTo.Value, "yyyy-MM")
+        CreateExcelWorkbook()
+        WriteExcelHeader()
+        WriteExcelBody()
+        WriteExcelFooter()
+        DisplayExcelWorkbook()
+        Me.Close()
+    End Sub
+
+    Private Sub CreateExcelWorkbook()
+        'Start a new workbook in Excel
+        xlApp = New Excel.Application
+        xlApp.WindowState = Excel.XlWindowState.xlMaximized
+        'Start a new workbook in Excel
+        xlWorkBook = xlApp.Workbooks.Add
+        SaveExcelWorkbook()
+    End Sub
+
+    Private Sub SaveExcelWorkbook()
+        ' Name and Save the Workbook
+        Dim Saved As Boolean = False
+        Dim Number As Integer = 0
+        Dim FileName As String = XLDirectory & XLFileName & XLExtention
+        Do While Saved = False
+            Try
+                xlApp.DisplayAlerts = False
+                xlWorkBook.SaveAs(FileName)
+                Saved = True
+            Catch ex As Exception
+                Number += 1
+                If Number > 10 Then
+                    MessageBox.Show("We could not Overwrite the file." & vbCrLf & vbCrLf & "File: " & FileName & vbCrLf & vbCrLf & "Please close the Above Excel File and try again")
+                End If
+                FileName = XLDirectory & XLFileName & " " & Number & XLExtention
+            End Try
+        Loop
+    End Sub
+
+    Private Sub WriteExcelHeader()
+        'Add data to cells of the first worksheet in the new workbook
+
+        'xlWorkSheet = xlWorkBook.Sheets("Sheet1")
+        Try
+            xlWorkSheet = xlWorkBook.Sheets("Sheet1")
+        Catch ex As Exception
+            xlWorkSheet = xlWorkBook.Sheets.Add(After:=xlWorkBook.Sheets(xlWorkBook.Sheets.Count))
+        End Try
+
+        With xlWorkSheet
+            .Range("A1:AB3").Font.Name = "Calibri"
+
+            'Add Headings
+            .Range("A1").Value = GlobalFirmDetailRow.FirmName
+            .Range("A1").Font.Bold = True
+            .Range("A1").Font.Size = 20
+            .Range("A2").Value = "Payouts From " & txtDateFrom.Text & " to " & txtDateTo.Text
+            .Range("A2").Font.Bold = True
+            .Range("A2").Font.Size = 16
+
+            .Range("A4").Value = "Day"
+            .Range("B4").Value = "Date"
+
+            .Range("C4").Value = "Cashier"
+            .Range("D4").Value = "Shift"
+
+            .Range("E4").Value = "Per Day"
+            .Range("F4").Value = "Payout 1"
+            .Range("G4").Value = "Reason 1"
+            .Range("H4").Value = "Payout 2"
+            .Range("I4").Value = "Reason 2"
+            .Range("J4").Value = "Payout 3"
+            .Range("K4").Value = "Reason 3"
+            .Range("L4").Value = "Payout 4"
+            .Range("M4").Value = "Reason 4"
+            .Range("N4").Value = "Payout 5"
+            .Range("O4").Value = "Reason 5"
+            .Range("P4").Value = "Payout 6"
+            .Range("Q4").Value = "Reason 6"
+
+            .Range("A4:Q4").Font.Bold = True
+            .Range("A4:Q4").Font.Size = 9
+            .Range("A4:Q4").WrapText = True
+            .Range("A4:Q4").HorizontalAlignment = Excel.Constants.xlCenter
+
+            ' Setup Column Widths
+
+            .Range("A4").ColumnWidth = 5
+            .Range("B4").ColumnWidth = 6
+            .Range("C4").ColumnWidth = 15
+            .Range("D4").ColumnWidth = 8
+            .Range("E4").ColumnWidth = 11
+            .Range("F4").ColumnWidth = 10
+            .Range("G4").ColumnWidth = 20
+            .Range("H4").ColumnWidth = 10
+            .Range("I4").ColumnWidth = 20
+            .Range("I4").ColumnWidth = 10
+            .Range("J4").ColumnWidth = 20
+            .Range("L4").ColumnWidth = 10
+            .Range("M4").ColumnWidth = 20
+            .Range("N4").ColumnWidth = 10
+            .Range("O4").ColumnWidth = 20
+            .Range("P4").ColumnWidth = 10
+            .Range("Q4").ColumnWidth = 20
+
+            .Range("A4:Q4").Borders.LineStyle = Excel.Constants.xlSolid
+        End With
+    End Sub
+
+    Private Sub WriteExcelBody()
+        Dim CurrentRecordId As Integer
+        SpreadsheetLine = 4
+
+        With xlWorkSheet
+            .Range("A5:Z400").Font.Bold = False
+            .Range("A5:Z400").Font.Size = 11
+        End With
+
+        ' Loop through the data and create the spreadsheet body 
+
+        CashupBindingSource.MoveFirst()
+        Do
+            Try
+                CashUpRow = CashupBindingSource.Current
+            Catch ex As Exception
+                Exit Do
+            End Try
+            If CashupRow IsNot Nothing Then
+                If CurrentRecordId = CashupRow.RecordId Then Exit Do
+                CurrentRecordId = CashupRow.RecordId
+
+                ' If there are no payouts then go to the next Cash-up
+                With CashupRow
+                    If .Payout1 = 0.0 And .Payout2 = 0.0 And .Payout3 = 0.0 And .Payout4 = 0.0 And .Payout5 = 0.0 And .Payout6 = 0.0 Then
+                        CashupBindingSource.MoveNext()
+                        Continue Do
+                    End If
+                    If .Payout1 <> 0.0 Then Column1IsZero = 1
+                    If .Payout2 <> 0.0 Then Column2IsZero = 1
+                    If .Payout3 <> 0.0 Then Column3IsZero = 1
+                    If .Payout4 <> 0.0 Then Column4IsZero = 1
+                    If .Payout5 <> 0.0 Then Column5IsZero = 1
+                    If .Payout6 <> 0.0 Then Column6IsZero = 1
+                End With
+
+                SpreadsheetLine += 1
+                LineNoString = SpreadsheetLine
+
+                With xlWorkSheet
+                    CellString = "A" & LineNoString
+                    .Range(CellString).Value = Mid(CashupRow.Date.DayOfWeek.ToString, 1, 3)                            ' Left(SalesRow.Date.DayOfWeek.ToString, 3)
+                    CellString = "B" & LineNoString
+                    .Range(CellString).Value = Format(CashupRow.Date, "dd MMM yy")
+                    ReadEmployee()
+                    CellString = "C" & LineNoString
+                    .Range(CellString).Value = EmployeeRow.Description
+                    CellString = "D" & LineNoString
+                    .Range(CellString).Value = "Shift " & (CashupRow.Time + 1)
+                    CellString = "E" & LineNoString
+                    FormulaString = "=F" & LineNoString & "+H" & LineNoString & "+J" & LineNoString & "+L" & LineNoString & "+N" & LineNoString & "+P" & LineNoString
+                    .Range(CellString).Formula = FormulaString
+                    CellString = "F" & LineNoString
+                    .Range(CellString).Value = CashupRow.Payout1
+                    If .Range(CellString).Value > 20 Then .Range(CellString).Interior.Color = Color.Yellow
+                    CellString = "G" & LineNoString
+                    .Range(CellString).Value = CashupRow.PayoutReason1
+                    CellString = "H" & LineNoString
+                    .Range(CellString).Value = CashupRow.Payout2
+                    If .Range(CellString).Value > 20 Then .Range(CellString).Interior.Color = Color.Yellow
+                    CellString = "I" & LineNoString
+                    .Range(CellString).Value = CashupRow.PayoutReason2
+                    CellString = "J" & LineNoString
+                    .Range(CellString).Value = CashupRow.Payout3
+                    If .Range(CellString).Value > 20 Then .Range(CellString).Interior.Color = Color.Yellow
+                    CellString = "K" & LineNoString
+                    .Range(CellString).Value = CashupRow.PayoutReason3
+                    CellString = "L" & LineNoString
+                    .Range(CellString).Value = CashupRow.Payout4
+                    If .Range(CellString).Value > 20 Then .Range(CellString).Interior.Color = Color.Yellow
+                    CellString = "M" & LineNoString
+                    .Range(CellString).Value = CashupRow.PayoutReason4
+                    CellString = "N" & LineNoString
+                    .Range(CellString).Value = CashupRow.Payout5
+                    If .Range(CellString).Value > 20 Then .Range(CellString).Interior.Color = Color.Yellow
+                    CellString = "O" & LineNoString
+                    .Range(CellString).Value = CashupRow.PayoutReason5
+                    CellString = "P" & LineNoString
+                    .Range(CellString).Value = CashupRow.Payout6
+                    If .Range(CellString).Value > 20 Then .Range(CellString).Interior.Color = Color.Yellow
+                    CellString = "Q" & LineNoString
+                    .Range(CellString).Value = CashupRow.PayoutReason6
+
+                    CellString = "E" & LineNoString
+                    If .Range(CellString).Value > 50 Then .Range(CellString).Interior.Color = Color.Yellow
+
+                    CellString = "A" & LineNoString & ":Q" & LineNoString
+                    .Range(CellString).Borders.LineStyle = Excel.Constants.xlSolid
+                    CellString = "B" & LineNoString & ":Q" & LineNoString
+                    .Range(CellString).HorizontalAlignment = Excel.Constants.xlLeft
+                    CellString = "A" & LineNoString
+                    .Range(CellString).HorizontalAlignment = Excel.Constants.xlRight
+                    CellString = "E" & LineNoString & ":F" & LineNoString
+                    .Range(CellString).HorizontalAlignment = Excel.Constants.xlRight
+                    .Range(CellString).NumberFormat = "#,###,##0.00"
+                    CellString = "H" & LineNoString
+                    .Range(CellString).HorizontalAlignment = Excel.Constants.xlRight
+                    .Range(CellString).NumberFormat = "#,###,##0.00"
+                    CellString = "J" & LineNoString
+                    .Range(CellString).HorizontalAlignment = Excel.Constants.xlRight
+                    .Range(CellString).NumberFormat = "#,###,##0.00"
+                    CellString = "L" & LineNoString
+                    .Range(CellString).HorizontalAlignment = Excel.Constants.xlRight
+                    .Range(CellString).NumberFormat = "#,###,##0.00"
+                    CellString = "N" & LineNoString
+                    .Range(CellString).HorizontalAlignment = Excel.Constants.xlRight
+                    .Range(CellString).NumberFormat = "#,###,##0.00"
+                    CellString = "P" & LineNoString
+                    .Range(CellString).HorizontalAlignment = Excel.Constants.xlRight
+                    .Range(CellString).NumberFormat = "#,###,##0.00"
+                End With
+            End If
+            CashupBindingSource.MoveNext()
+            If SpreadsheetLine > 200 Then Exit Do ' Lots of lines of data on spreadsheet - Break out
+        Loop
+    End Sub
+
+    Private Sub ReadEmployee()
+        Try
+            EmployeeBindingSource.DataSource = From Employee In (New EmployeeDataContext).Employees Where Employee.RecordId = CashUpRow.EmployeeRecordId
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+        EmployeeRow = If(EmployeeBindingSource.Current, New Employee)
+    End Sub
+
+    Private Sub WriteExcelFooter()
+
+        'Write the Footer First Line
+
+        SpreadsheetLine += 2
+        LineNoString = SpreadsheetLine
+
+        With xlWorkSheet
+
+            CellString = "D" & LineNoString
+            .Range(CellString).Value = "Total"
+            CellString = "E" & LineNoString
+            FormulaString = "=SUM(E5:E" & (LineNoString - 1) & ")"
+            .Range(CellString).Formula = FormulaString                                                        ' "=SUM(C4:C34)"
+
+            CellString = "D" & LineNoString & ":E" & LineNoString
+            .Range(CellString).Borders.LineStyle = Excel.Constants.xlSolid
+            CellString = "E" & LineNoString
+            .Range(CellString).HorizontalAlignment = Excel.Constants.xlRight
+            .Range(CellString).NumberFormat = "#,###,##0.00"
+            CellString = "D" & LineNoString & ":E" & LineNoString
+            .Range(CellString).Font.Bold = True
+        End With
+    End Sub
+
+    Private Sub DisplayExcelWorkbook()
+        XLWorkSheetSetup()
+        With xlApp
+            LineNoString = SpreadsheetLine
+            CellString = "A4:Q" & LineNoString
+            xlWorkSheet.Range(CellString).Columns.AutoFit()
+            xlWorkSheet.Range("E5").Select()
+            .ActiveWindow.FreezePanes = True
+            '.ActiveWindow.Zoom = 85 ' open sheet at 85%
+            .Visible = True
+        End With
+        If Column6IsZero = 0 Then xlWorkSheet.Range("P4:Q4").ColumnWidth = 0
+        If Column5IsZero = 0 Then xlWorkSheet.Range("N4:O4").ColumnWidth = 0
+        If Column4IsZero = 0 Then xlWorkSheet.Range("L4:M4").ColumnWidth = 0
+        If Column3IsZero = 0 Then xlWorkSheet.Range("J4:K4").ColumnWidth = 0
+        If Column2IsZero = 0 Then xlWorkSheet.Range("H4:I4").ColumnWidth = 0
+        If Column1IsZero = 0 Then xlWorkSheet.Range("F4:G4").ColumnWidth = 0
+
+        'xlWorkBook.Worksheets(1).PageSetup.PrintOut()                                                                        ' Immediate printout does work.
+    End Sub
+
+    Private Sub OpenExcelSpreadsheet()
+        Dim xlApp As Excel.Application
+        'Set to new instance of excel
+        xlApp = New Excel.Application
+        xlApp.Visible = True
+        xlApp.WindowState = Excel.XlWindowState.xlMaximized
+        Dim xlWorkBook As Excel.Workbook = xlApp.Workbooks.Open(XLFileName)
+        Me.Close()
+    End Sub
+
+    Private Sub XLWorkSheetSetup()
+        With xlWorkBook.Worksheets(1).PageSetup
+            '~~> In this section, you can define where and what your header and footer should look like
+            '.LeftHeader = ""
+            '.CenterHeader = "Sample Header"
+            '.RightHeader = ""
+            '.LeftFooter = ""
+            '.CenterFooter = "Sample Footer"
+            '.RightFooter = ""
+
+            '~~> In this section, you can set the margins
+            .LeftMargin = xlApp.CentimetersToPoints(1)
+            .RightMargin = xlApp.CentimetersToPoints(1)
+            .TopMargin = xlApp.CentimetersToPoints(1)
+            .BottomMargin = xlApp.CentimetersToPoints(1)
+            .HeaderMargin = xlApp.CentimetersToPoints(0.5)
+            .FooterMargin = xlApp.CentimetersToPoints(0.5)
+
+            '~~> Other settings that you can set
+            .PrintHeadings = False
+            .PrintGridlines = False
+            .PrintComments = Excel.XlPrintLocation.xlPrintNoComments
+            .CenterHorizontally = False
+            .CenterVertically = False
+            .Orientation = Excel.XlPageOrientation.xlLandscape                                   ' Excel.XlPageOrientation.xlLandscape               ' '1 = xlPortrait; 2 = xlLandscape
+            '.Draft = True
+            .PaperSize = Excel.XlPaperSize.xlPaperA4
+            .FirstPageNumber = Excel.Constants.xlAutomatic
+            .Order = Excel.XlOrder.xlDownThenOver
+            .BlackAndWhite = True
+            .PrintErrors = Excel.XlPrintErrors.xlPrintErrorsDisplayed
+            .OddAndEvenPagesHeaderFooter = False
+            .DifferentFirstPageHeaderFooter = False
+            .ScaleWithDocHeaderFooter = True
+            .AlignMarginsHeaderFooter = True
+
+            '~~> More settings that you can set
+            .Zoom = False
+            .FitToPagesWide = 1
+            .FitToPagesTall = 1
+        End With
+    End Sub
+
+End Class

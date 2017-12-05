@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="LeaveTakenDataClass">
+  <DataContextMoniker Name="/LeaveTakenDataContext" />
+  <nestedChildShapes>
+    <classShape Id="1e9df7bb-3d25-457b-b6e5-dcee1561271a" absoluteBounds="3.5, 0.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/LeaveTakenDataContext/LeaveTaken" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9ac952d5-f124-4f83-8dca-f384a9e97159" absoluteBounds="3.515, 1.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

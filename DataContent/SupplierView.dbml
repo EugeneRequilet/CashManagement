@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CM" Class="SupplierViewDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(local)\SQLEXPRESS;Initial Catalog=CM;Integrated Security=True;MultipleActiveResultSets=True" SettingsObjectName="CashManagement.My.MySettings" SettingsPropertyName="CMConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.SupplierView" Member="SupplierViews">
+    <Type Name="SupplierView">
+      <Column Name="RecordId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Telephone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="CellNumber" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="InactiveSupplier" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="COS" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="InactiveSupplierDescription" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="ExpenseType" Type="System.String" DbType="VarChar(7)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

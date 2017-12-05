@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DefaultShiftView">
+  <DataContextMoniker Name="/DefaultShiftViewDataContext" />
+  <nestedChildShapes>
+    <classShape Id="005b713c-458a-4151-9ec6-0481dece5c48" absoluteBounds="1.375, 0.625, 2, 1.9631982421875">
+      <DataClassMoniker Name="/DefaultShiftViewDataContext/DefaultShiftView" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8c16be54-5d90-45f0-90d3-6fe77fe0a87a" absoluteBounds="1.3900000000000001, 1.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

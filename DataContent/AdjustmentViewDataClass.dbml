@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CM" Class="AdjustmentViewDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(local)\SQLEXPRESS;Initial Catalog=CM;Integrated Security=True;MultipleActiveResultSets=True" SettingsObjectName="CashManagement.My.MySettings" SettingsPropertyName="CMConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.AdjustmentView" Member="AdjustmentViews">
+    <Type Name="AdjustmentView">
+      <Column Name="RecordId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceNumber" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="DocumentTypeDesc" Type="System.String" DbType="VarChar(11) NOT NULL" CanBeNull="false" />
+      <Column Name="Reconciled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceAmount" Type="System.Decimal" DbType="Decimal(13,2)" CanBeNull="true" />
+      <Column Name="CreditNoteAmount" Type="System.Decimal" DbType="Decimal(13,2)" CanBeNull="true" />
+      <Column Name="Memo" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="SupplierName" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeName" Type="System.String" DbType="VarChar(51)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

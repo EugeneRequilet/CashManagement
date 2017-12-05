@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DailyShiftHeaderView">
+  <DataContextMoniker Name="/DailyShiftHeaderViewDataContext" />
+  <nestedChildShapes>
+    <classShape Id="f89a47a8-73f9-434e-8ccd-31c9083e890c" absoluteBounds="3.5, 1, 2.625, 2.1554996744791666">
+      <DataClassMoniker Name="/DailyShiftHeaderViewDataContext/DailyShiftHeaderView" />
+      <nestedChildShapes>
+        <elementListCompartment Id="256dc8d4-ec78-49da-a251-c6d017a4098b" absoluteBounds="3.515, 1.46, 2.5949999999999998, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

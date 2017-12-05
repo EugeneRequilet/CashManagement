@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CM" Class="SupplierDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(local)\SQLEXPRESS;Initial Catalog=CM;Integrated Security=True;MultipleActiveResultSets=True" SettingsObjectName="CashManagement.My.MySettings" SettingsPropertyName="CMConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Supplier" Member="Suppliers">
+    <Type Name="Supplier">
+      <Column Name="RecordId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Telephone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="CellNumber" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="PhysicalAddress1" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="PhysicalAddress2" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="PhysicalAddress3" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="PhysicalCode" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="PostalAddress1" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="PostalAddress2" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="PostalAddress3" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="PostalCode" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="BankName" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="BranchName" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="BranchNumber" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="AccountNumber" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="AccountType" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="InactiveSupplier" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="COS" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

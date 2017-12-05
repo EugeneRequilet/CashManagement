@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="BranchView">
+  <DataContextMoniker Name="/BranchViewDataContext" />
+  <nestedChildShapes>
+    <classShape Id="453f0a47-3435-4df9-82f6-06cadbb6bef1" absoluteBounds="5.125, 1.625, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/BranchViewDataContext/BranchView" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0721c023-b7ea-4bd3-95e3-7cff5b3ee8ed" absoluteBounds="5.14, 2.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
